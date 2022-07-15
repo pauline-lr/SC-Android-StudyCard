@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">StudyCard</string>
+
+    <string name="http_no_connection">No data : Check your internet connection</string>
+    <string name="request_error">An error occurred during your request</string>
+    <string name="technical_error">An unknown error happened : Try again</string>
+    <string name="not_found">Not Found</string>
+
+</resources>
