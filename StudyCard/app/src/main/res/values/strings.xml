@@ -1,9 +1,24 @@
 <resources>
     <string name="app_name">StudyCard</string>
 
-    <string name="http_no_connection">No data : Check your internet connection</string>
-    <string name="request_error">An error occurred during your request</string>
-    <string name="technical_error">An unknown error happened : Try again</string>
-    <string name="not_found">Not Found</string>
+    <string name="http_no_connection">Pas de connection</string>
+    <string name="request_error">Une erreur est survenue</string>
+    <string name="technical_error">Une erreur inattendue est survenue, veuillez réessayer plus tard.</string>
+    <string name="not_found">Contenu non trouvé</string>
+    <string name="pseudo">pseudo</string>
+    <string name="account_password">mot de passe</string>
+    <string name="login">Connexion</string>
+    <string name="register">S\'inscrire</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

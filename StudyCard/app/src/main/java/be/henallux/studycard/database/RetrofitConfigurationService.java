@@ -10,12 +10,12 @@ import retrofit2.Retrofit;
 import retrofit2.converter.moshi.MoshiConverterFactory;
 
 public class RetrofitConfigurationService {
-    private static final String BASE_URL = "https://henallux.free.beeceptor.com/";
+    private static final String BASE_URL = "http://10.0.2.2:3001";
 
     // Retrofit client creation
     private Retrofit retrofitClient;
 
-    private static StudyCardWebService pizzaWebService = null;
+    private static StudyCardWebService studyCardWebService = null;
 
     private RetrofitConfigurationService(Context context) {
         initializeRetrofit(context);
@@ -42,9 +42,9 @@ public class RetrofitConfigurationService {
     }
 
     public StudyCardWebService mStudyCardWebService() {
-        if (pizzaWebService == null) {
-            pizzaWebService = retrofitClient.create(StudyCardWebService.class);
+        if (studyCardWebService == null) {
+            studyCardWebService = retrofitClient.create(StudyCardWebService.class);
         }
-        return pizzaWebService;
+        return studyCardWebService;
     }
 }

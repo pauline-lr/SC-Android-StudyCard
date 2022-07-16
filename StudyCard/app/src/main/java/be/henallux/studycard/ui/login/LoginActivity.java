@@ -7,8 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import be.henallux.studycard.R;
 
 public class LoginActivity extends AppCompatActivity {
-    private static final String TAG = "Login";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

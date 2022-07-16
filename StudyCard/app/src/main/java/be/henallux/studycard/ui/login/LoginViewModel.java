@@ -7,16 +7,15 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import be.henallux.studycard.models.Login;
-import be.henallux.studycard.models.NetworkError;
-import be.henallux.studycard.database.RetrofitConfigurationService;
-import be.henallux.studycard.database.StudyCardWebService;
-import be.henallux.studycard.utils.errors.NoConnectivityException;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.net.HttpURLConnection;
 
+import be.henallux.studycard.database.RetrofitConfigurationService;
+import be.henallux.studycard.database.StudyCardWebService;
+import be.henallux.studycard.models.Login;
+import be.henallux.studycard.models.NetworkError;
+import be.henallux.studycard.utils.errors.NoConnectivityException;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,11 +32,10 @@ public class LoginViewModel extends AndroidViewModel {
     public LoginViewModel(@NonNull Application application) {
         super(application);
         this.mStudyCardWebService = RetrofitConfigurationService.getInstance(application).mStudyCardWebService();
-
     }
 
-    public void getTokenFromWeb(String email, String password) {
-        Login login = new Login(email, password);
+    public void getTokenFromWeb(String pseudo, String password) {
+        Login login = new Login(pseudo, password);
         mStudyCardWebService.login(login).enqueue(new Callback<String>() {
             @Override
             public void onResponse(@NotNull Call<String> call, @NotNull Response<String> response) {

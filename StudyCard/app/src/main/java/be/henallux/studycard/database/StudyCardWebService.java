@@ -7,6 +7,6 @@ import retrofit2.http.POST;
 
 public interface StudyCardWebService {
     // routes
-    @POST("user/login")
+    @POST("v1/client/login")
     Call<String> login(@Body Login login);
 }

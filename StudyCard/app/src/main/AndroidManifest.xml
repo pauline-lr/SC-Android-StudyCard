@@ -3,6 +3,8 @@
     package="be.henallux.studycard">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,14 +13,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudyCard">
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.login.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:theme="@style/Theme.StudyCard.NoActionBar"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.StudyCard.NoActionBar"></activity>
     </application>
 
 </manifest>
