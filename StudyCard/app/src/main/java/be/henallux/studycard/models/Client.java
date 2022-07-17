@@ -12,8 +12,7 @@ public class Client {
     public String email;
     public Boolean isAdmin;
 
-    public Client(Integer idClient, String pseudo, String password, String email, Boolean isAdmin) {
-        this.id = idClient;
+    public Client(String pseudo, String password, String email, Boolean isAdmin) {
         this.pseudo = pseudo;
         this.password = password;
         this.email = email;

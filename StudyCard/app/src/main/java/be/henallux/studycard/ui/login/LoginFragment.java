@@ -55,7 +55,10 @@ public class LoginFragment extends Fragment {
             editor.commit();
             Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
+            Toast.makeText(getActivity(), "Bienvenue" , Toast.LENGTH_SHORT ).show();
             return;
         }
+
+        Toast.makeText(getActivity(), "Pseudo ou mot de passe incorrect" , Toast.LENGTH_SHORT ).show();
     }
 }

@@ -10,6 +10,14 @@ public class ClientDto {
     public String email;
     public Boolean isAdmin;
 
+    public ClientDto(Integer id, String pseudo, String password, String email, Boolean isAdmin) {
+        this.id = id;
+        this.pseudo = pseudo;
+        this.password = password;
+        this.email = email;
+        this.isAdmin = isAdmin;
+    }
+
     public Integer getId() {
         return id;
     }

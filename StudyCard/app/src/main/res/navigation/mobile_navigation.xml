@@ -2,6 +2,13 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation">
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="be.henallux.studycard.ui.home.HomeFragment"
+        android:label="home_fragment"
+        tools:layout="@layout/fragment_home"/>
 
 </navigation>
