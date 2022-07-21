@@ -17,6 +17,12 @@ public interface StudyCardWebService {
 
     // obtenir tous les decks d'un utilisateur avec son pseudo
     // @Path car on l'obtient avec l'url et non le body
-    @GET("/v1/deck/all/{pseudo}")
-    Call<List<DeckDto>> getNextDecksUser(@Path("pseudo") String pseudo);
+    @GET("/v1/decks/all/{pseudo}")
+    Call<List<DeckDto>> getDecksUser(@Path("pseudo") String pseudo);
+
+    @GET("decks")
+    Call<List<DeckDto>> getDecks();
+
+    @GET("v1/decks/{id}")
+    Call<DeckDto> getDeck(@Path("id") Integer id);
 }

@@ -1,5 +1,6 @@
 package be.henallux.studycard.models;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -20,12 +21,13 @@ public class Session {
         this.deck = deck;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Session{" +
                 "id=" + id +
                 ", completed=" + completed +
-                ", deck=" + deck +
+                ", decks=" + deck +
                 '}';
     }
 }

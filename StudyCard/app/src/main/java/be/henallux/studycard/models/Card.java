@@ -1,6 +1,7 @@
 package be.henallux.studycard.models;
 
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -27,11 +28,12 @@ public class Card {
         this.backCard = backCard;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Card{" +
                 "id=" + id +
-                ", deck=" + deck +
+                ", decks=" + deck +
                 ", category=" + category +
                 ", frontCard='" + frontCard + '\'' +
                 ", backCard='" + backCard + '\'' +

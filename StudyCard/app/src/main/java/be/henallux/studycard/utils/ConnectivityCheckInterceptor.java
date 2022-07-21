@@ -12,7 +12,6 @@ import be.henallux.studycard.utils.errors.NoConnectivityException;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
-import be.henallux.studycard.utils.errors.NoConnectivityException;
 
 public class ConnectivityCheckInterceptor implements Interceptor {
     private Context context;

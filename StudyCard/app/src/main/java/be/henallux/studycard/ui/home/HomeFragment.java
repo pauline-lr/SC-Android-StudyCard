@@ -6,13 +6,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,69 +24,66 @@ import be.henallux.studycard.models.NetworkError;
 import be.henallux.studycard.ui.MainActivity;
 
 public class HomeFragment  extends Fragment {
-    private FragmentHomeBinding binding;
-    private RecyclerView homeRecyclerView;
-    private HomeViewModel viewModel;
+    private FragmentHomeBinding mFragmentHomeBinding;
+    private HomeViewModel mHomeViewModel;
 
     public HomeFragment() {}
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
-        viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        mFragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false);
+        mHomeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         Adapter adapter = new Adapter();
 
         sendRequestGetDecks();
-        viewModel.getDecks().observe(getViewLifecycleOwner(), deckList -> {
+        mHomeViewModel.getDecks().observe(getViewLifecycleOwner(), deckList -> {
             adapter.setDecks(deckList);
-            binding.progressBarDecks.setVisibility(View.GONE);
-            binding.listAllDecksUser.setVisibility(View.VISIBLE);
+            mFragmentHomeBinding.progressBarDecks.setVisibility(View.GONE);
+            mFragmentHomeBinding.listAllDecksUserRecyclerView.setVisibility(View.VISIBLE);
         });
-        viewModel.getError().observe(getViewLifecycleOwner(), this::displayErrorScreen);
+        mHomeViewModel.getError().observe(getViewLifecycleOwner(), this::displayError);
 
-        binding.listAllDecksUser.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.HORIZONTAL, false));
-        binding.listAllDecksUser.setAdapter(adapter);
+        mFragmentHomeBinding.listAllDecksUserRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
+        mFragmentHomeBinding.listAllDecksUserRecyclerView.setAdapter(adapter);
 
-        return binding.getRoot();
+        return mFragmentHomeBinding.getRoot();
     }
 
     @Override
     public void onResume() {
-        ((MainActivity) getActivity()).setToolBarTitle(getString(R.string.menu_home));
+        ((MainActivity) requireActivity()).setToolBarTitle(getString(R.string.menu_home));
         super.onResume();
     }
 
     private void sendRequestGetDecks(){
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
-        String email = sharedPreferences.getString("email", "vide");
-        viewModel.getAllDecksFromUser(email);
-        binding.progressBarDecks.setVisibility(View.VISIBLE);
-        binding.listAllDecksUser.setVisibility(View.GONE);
+        String pseudo = sharedPreferences.getString("pseudo", "vide");
+        mHomeViewModel.getAllDecksFromUser(pseudo);
+        mFragmentHomeBinding.progressBarDecks.setVisibility(View.VISIBLE);
+        mFragmentHomeBinding.listAllDecksUserRecyclerView.setVisibility(View.GONE);
     }
 
 
-    private void displayErrorScreen(NetworkError error) {
-        binding.progressBarDecks.setVisibility(View.GONE);
+    private void displayError(NetworkError error) {
+        mFragmentHomeBinding.progressBarDecks.setVisibility(View.GONE);
         if (error == null) {
-            binding.listAllDecksUser.setVisibility(View.VISIBLE);
-            binding.errorLayout.getRoot().setVisibility(View.GONE);
+            mFragmentHomeBinding.listAllDecksUserRecyclerView.setVisibility(View.VISIBLE);
+            //binding.errorLayout.getRoot().setVisibility(View.GONE);
             return;
         }
-        binding.errorLayout.getRoot().setVisibility(View.VISIBLE);
-        binding.listAllDecksUser.setVisibility(View.GONE);
-        binding.errorLayout.errorText.setText(error.getErrorMessage());
-        binding.errorLayout.floatingActionButton.setOnClickListener(view -> this.sendRequestGetDecks());
+        //binding.errorLayout.getRoot().setVisibility(View.VISIBLE);
+        mFragmentHomeBinding.listAllDecksUserRecyclerView.setVisibility(View.GONE);
+        //binding.errorLayout.errorText.setText(error.getErrorMessage());
+        //binding.errorLayout.floatingActionButton.setOnClickListener(view -> this.sendRequestGetDecks());
     }
 
 
     private static class HomeViewHolder extends RecyclerView.ViewHolder {
-        // Declare all the fields of a single item here.
-        public TextView deckName;
-
+        public Button deckButton;
 
         public HomeViewHolder(@NonNull View itemView) {
             super(itemView);
-            deckName = itemView.findViewById(R.id.deck_name);
+            deckButton = (Button) itemView.findViewById(R.id.deck_button);
         }
     }
 
@@ -104,8 +100,8 @@ public class HomeFragment  extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
-            Deck c = decksFromUser.get(position);
-            holder.deckName.setText(c.deckName);
+            Deck deck = decksFromUser.get(position);
+            holder.deckButton.setText(deck.deckName);
         }
 
         @Override
@@ -118,6 +114,4 @@ public class HomeFragment  extends Fragment {
             notifyDataSetChanged();
         }
     }
-
-
 }

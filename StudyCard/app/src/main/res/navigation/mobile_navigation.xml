@@ -9,6 +9,26 @@
         android:id="@+id/homeFragment"
         android:name="be.henallux.studycard.ui.home.HomeFragment"
         android:label="home_fragment"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_deckFragment"
+            app:destination="@id/deckFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/deckFragment"
+        android:name="be.henallux.studycard.ui.deck.DeckFragment"
+        android:label="deck_fragment"
+        tools:layout="@layout/fragment_deck">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <argument
+            android:name="deckName"
+            app:argType="string" />
+        <!-- <action
+             android:id="@+id/action_deckFragment_to_cardsFragment
+             app:destination="@id/cardsFragment" />-->
+    </fragment>
 
 </navigation>

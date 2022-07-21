@@ -1,5 +1,6 @@
 package be.henallux.studycard.models;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 

@@ -8,14 +8,14 @@ public class ClientDto {
     public String pseudo;
     public String password;
     public String email;
-    public Boolean isAdmin;
+    public Boolean is_admin;
 
     public ClientDto(Integer id, String pseudo, String password, String email, Boolean isAdmin) {
         this.id = id;
         this.pseudo = pseudo;
         this.password = password;
         this.email = email;
-        this.isAdmin = isAdmin;
+        this.is_admin = isAdmin;
     }
 
     public Integer getId() {
@@ -51,10 +51,21 @@ public class ClientDto {
     }
 
     public Boolean getAdmin() {
-        return isAdmin;
+        return is_admin;
     }
 
     public void setAdmin(Boolean admin) {
-        isAdmin = admin;
+        is_admin = admin;
+    }
+
+    @Override
+    public String toString() {
+        return "ClientDto{" +
+                "id=" + id +
+                ", pseudo='" + pseudo + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", isAdmin=" + is_admin +
+                '}';
     }
 }

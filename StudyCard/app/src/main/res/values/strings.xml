@@ -19,8 +19,14 @@
     <string name="invalid_password">Mot de passe invalide</string>
     <string name="login_failed">La connexion a échoué</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="menu_home">Acceuil</string>
+    <string name="menu_home">Accueil</string>
     <string name="deck_name">Nom du deck</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="decks">Paquets</string>
+    <string name="no_deck">Aucun deck</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="revision_deck">Réviser ce paquet</string>
 
 
 </resources>

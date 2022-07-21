@@ -18,6 +18,6 @@ public class DeckMapper {
             return null;
         }
 
-        return new Deck(dto.getId(), ClientMapper.getInstance().mapToClient(dto.getClient()), dto.getDeckName());
+        return new Deck(dto.getId(), ClientMapper.getInstance().mapToClient(dto.getClient()), dto.getDeck_name());
     }
 }

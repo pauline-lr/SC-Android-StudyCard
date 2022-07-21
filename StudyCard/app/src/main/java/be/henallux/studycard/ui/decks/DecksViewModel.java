@@ -1,4 +1,4 @@
-package be.henallux.studycard.ui.home;
+package be.henallux.studycard.ui.decks;
 
 import android.app.Application;
 import android.os.Build;
@@ -25,9 +25,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeViewModel extends AndroidViewModel {
+public class DecksViewModel extends AndroidViewModel {
     private MutableLiveData<List<Deck>> _decks = new MutableLiveData<>();
-    private LiveData<List<Deck>> decks = _decks;
+    private LiveData<List<Deck>> mDecks = _decks;
 
     private MutableLiveData<NetworkError> _error = new MutableLiveData<>();
     private LiveData<NetworkError> error = _error;
@@ -35,9 +35,9 @@ public class HomeViewModel extends AndroidViewModel {
     private StudyCardWebService mStudyCardWebService;
     private DeckMapper mDeckMapper;
 
-    public HomeViewModel(@NonNull Application application) {
+    public DecksViewModel(@NonNull Application application){
         super(application);
-        this.mStudyCardWebService = RetrofitConfigurationService.getInstance(application).mStudyCardWebService();
+        this.mStudyCardWebService =  RetrofitConfigurationService.getInstance(application).mStudyCardWebService();
         this.mDeckMapper = DeckMapper.getInstance();
     }
 
@@ -48,7 +48,6 @@ public class HomeViewModel extends AndroidViewModel {
             public void onResponse(@NotNull Call<List<DeckDto>> call, @NotNull Response<List<DeckDto>> response) {
                 if (response.isSuccessful()) {
                     List<Deck> newList = new ArrayList<>();
-                    assert response.body() != null;
                     response.body().forEach((deck -> newList.add(mDeckMapper.mapToDeck(deck))));
                     _decks.setValue(newList);
                     _error.setValue(null);
@@ -66,10 +65,11 @@ public class HomeViewModel extends AndroidViewModel {
                 }
             }
         });
+
     }
 
     public LiveData<List<Deck>> getDecks() {
-        return decks;
+        return mDecks;
     }
 
     public LiveData<NetworkError> getError() {

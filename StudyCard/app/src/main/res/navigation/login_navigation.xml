@@ -5,13 +5,22 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@id/loginFragment">
 
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="be.henallux.studycard.ui.home.HomeFragment"
+        android:label="home_fragment"
+        tools:layout="@layout/fragment_home" />
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="be.henallux.studycard.ui.login.LoginFragment"
         android:label="login_fragment"
         tools:layout="@layout/fragment_login">
         <action
-            android:id="@+id/action_loginFragment_to_login"
-            app:destination="@id/loginFragment" />
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
+
+
 </navigation>

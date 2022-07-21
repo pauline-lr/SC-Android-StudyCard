@@ -7,7 +7,7 @@ public class DeckDto {
     @Json(name = "id") // JSON key
     private Integer id;
     public ClientDto client;
-    public String deckName;
+    public String deck_name;
 
     public Integer getId() {
         return id;
@@ -25,11 +25,20 @@ public class DeckDto {
         this.client = client;
     }
 
-    public String getDeckName() {
-        return deckName;
+    public String getDeck_name() {
+        return deck_name;
     }
 
-    public void setDeckName(String deckName) {
-        this.deckName = deckName;
+    public void setDeck_name(String deck_name) {
+        this.deck_name = deck_name;
+    }
+
+    @Override
+    public String toString() {
+        return "Deck{" +
+                "id=" + id +
+                ", client=" + client.getId().toString() +
+                ", deckName='" + deck_name + '\'' +
+                '}';
     }
 }
