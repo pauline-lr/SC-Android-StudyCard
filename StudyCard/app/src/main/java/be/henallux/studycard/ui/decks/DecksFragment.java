@@ -151,7 +151,7 @@ public class DecksFragment extends Fragment {
 
         DeckViewHolder(View itemView, DeckAdapter.ClickListener clickListener) {
             super(itemView);
-            mDeckName = (TextView) itemView.findViewById(R.id.deck_button);
+            mDeckName = itemView.findViewById(R.id.deck_button);
             this.clickListener = clickListener;
             itemView.setOnClickListener(this);
         }

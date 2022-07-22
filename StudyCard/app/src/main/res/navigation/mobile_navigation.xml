@@ -10,9 +10,9 @@
         android:name="be.henallux.studycard.ui.home.HomeFragment"
         android:label="home_fragment"
         tools:layout="@layout/fragment_home">
-       <!-- <action
+       <action
             android:id="@+id/action_homeFragment_to_deckFragment"
-            app:destination="@id/deckFragment" />-->
+            app:destination="@id/deckFragment" />
 
     </fragment>
     <fragment
@@ -26,8 +26,8 @@
     <argument
           android:name="deckName"
           app:argType="string" />
-    <!--  <action
-           android:id="@+id/action_deckFragment_to_cardsFragment
+    <!--<action
+           android:id="@+id/action_deckFragment_to_cardsFragment"
            app:destination="@id/cardsFragment" />-->
     </fragment>
 

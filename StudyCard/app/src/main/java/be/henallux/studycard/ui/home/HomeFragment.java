@@ -102,7 +102,7 @@ public class HomeFragment  extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
             Deck deck = decksFromUser.get(position);
-            //holder.deckButton.setOnClickListener(view ->  Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_deckFragment));
+            holder.deckButton.setOnClickListener(view ->  Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_deckFragment));
             holder.deckButton.setText(deck.deckName);
         }
 
