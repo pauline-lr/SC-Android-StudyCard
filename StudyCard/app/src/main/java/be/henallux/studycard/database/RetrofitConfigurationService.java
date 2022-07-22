@@ -8,13 +8,16 @@ import com.google.gson.GsonBuilder;
 import com.squareup.moshi.Moshi;
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory;
 
+import java.io.IOException;
 import java.util.Date;
 
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter;
 
 import be.henallux.studycard.utils.ConnectivityCheckInterceptor;
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -42,7 +45,7 @@ public class RetrofitConfigurationService {
                 .addInterceptor(new ConnectivityCheckInterceptor(context))
                 .addInterceptor(logging)
                 .addInterceptor(chain -> {
-                    Request newRequest = chain.request().newBuilder()
+                    Request newRequest  = chain.request().newBuilder()
                             .addHeader("Authorization", "Bearer " + sharedPreferences.getString("token", "vide"))
                             .build();
                     return chain.proceed(newRequest);

@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -83,7 +84,7 @@ public class HomeFragment  extends Fragment {
 
         public HomeViewHolder(@NonNull View itemView) {
             super(itemView);
-            deckButton = (Button) itemView.findViewById(R.id.deck_button);
+            deckButton = itemView.findViewById(R.id.deck_button);
         }
     }
 
@@ -101,6 +102,7 @@ public class HomeFragment  extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
             Deck deck = decksFromUser.get(position);
+            //holder.deckButton.setOnClickListener(view ->  Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_deckFragment));
             holder.deckButton.setText(deck.deckName);
         }
 

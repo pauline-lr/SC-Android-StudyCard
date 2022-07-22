@@ -8,8 +8,8 @@ public class CardDto {
     public Integer id;
     public DeckDto deck;
     public RevisionCategoryDto category;
-    public String frontCard;
-    public String backCard;
+    public String front_card;
+    public String back_card;
 
     public Integer getId() {
         return id;
@@ -35,19 +35,30 @@ public class CardDto {
         this.category = category;
     }
 
-    public String getFrontCard() {
-        return frontCard;
+    public String getFront_card() {
+        return front_card;
     }
 
-    public void setFrontCard(String frontCard) {
-        this.frontCard = frontCard;
+    public void setFront_card(String front_card) {
+        this.front_card = front_card;
     }
 
-    public String getBackCard() {
-        return backCard;
+    public String getBack_card() {
+        return back_card;
     }
 
-    public void setBackCard(String backCard) {
-        this.backCard = backCard;
+    public void setBack_card(String back_card) {
+        this.back_card = back_card;
+    }
+
+    @Override
+    public String toString() {
+        return "Card{" +
+                "id=" + id +
+                ", deck=" + deck.getId().toString() +
+                ", category='" + category.getId().toString() +
+                ", frontCard=" + front_card + '\'' +
+                ", backCard=" + back_card + '\'' +
+                '}';
     }
 }

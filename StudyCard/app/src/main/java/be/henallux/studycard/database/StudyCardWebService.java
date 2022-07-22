@@ -3,6 +3,7 @@ package be.henallux.studycard.database;
 import java.util.List;
 
 import be.henallux.studycard.models.Login;
+import be.henallux.studycard.repositories.web.dto.CardDto;
 import be.henallux.studycard.repositories.web.dto.DeckDto;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -17,7 +18,7 @@ public interface StudyCardWebService {
 
     // obtenir tous les decks d'un utilisateur avec son pseudo
     // @Path car on l'obtient avec l'url et non le body
-    @GET("/v1/decks/all/{pseudo}")
+    @GET("/v1/deck/all/{pseudo}")
     Call<List<DeckDto>> getDecksUser(@Path("pseudo") String pseudo);
 
     @GET("decks")
@@ -25,4 +26,12 @@ public interface StudyCardWebService {
 
     @GET("v1/decks/{id}")
     Call<DeckDto> getDeck(@Path("id") Integer id);
+
+    @GET("cards")
+    Call<List<DeckDto>> getCards();
+
+    /*@GET("/v1/card/all/{dek_id}")
+    Call<List<CardDto>> getCardsDeck(@Path("id") Integer deck_id);*/
+    @GET("/v1/card/all/{id}")
+    Call<List<CardDto>> getCardsDeck(@Path("id") Integer id);
 }

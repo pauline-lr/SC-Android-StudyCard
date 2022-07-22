@@ -27,6 +27,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="revision_deck">Réviser ce paquet</string>
+    <string name="card_text">Texte sur la carte</string>
 
 
 </resources>
