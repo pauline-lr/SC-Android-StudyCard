@@ -17,6 +17,7 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.Objects;
 
 import be.henallux.studycard.R;
+import be.henallux.studycard.ui.login.LoginFragment;
 
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.homeFragment/*,R.id.personnalinformations*/)
+                R.id.homeFragment, R.id.personnalInformationsFragment)
                 .setDrawerLayout(drawer)
                 .build();
 

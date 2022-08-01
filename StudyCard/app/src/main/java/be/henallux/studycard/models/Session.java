@@ -27,7 +27,7 @@ public class Session {
         return "Session{" +
                 "id=" + id +
                 ", completed=" + completed +
-                ", decks=" + deck +
+                ", deck_id=" + deck +
                 '}';
     }
 }

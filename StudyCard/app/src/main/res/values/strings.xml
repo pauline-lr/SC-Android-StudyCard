@@ -5,7 +5,7 @@
     <string name="request_error">Une erreur est survenue</string>
     <string name="technical_error">Une erreur inattendue est survenue, veuillez réessayer plus tard.</string>
     <string name="not_found">Contenu non trouvé</string>
-    <string name="pseudo">pseudo</string>
+    <string name="pseudo">Pseudo</string>
     <string name="account_password">mot de passe</string>
     <string name="login">Connexion</string>
     <string name="register">S\'inscrire</string>
@@ -28,6 +28,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="revision_deck">Réviser ce paquet</string>
     <string name="card_text">Texte sur la carte</string>
+    <string name="mail_adress">Adresse mail</string>
+    <string name="personnal_informations">Informations personnelles</string>
+    <string name="logout">Se déconnecter</string>
 
 
 </resources>

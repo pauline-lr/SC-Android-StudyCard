@@ -25,7 +25,7 @@
         <activity
             android:name=".ui.MainActivity"
             android:label="App"
-            android:theme="@style/Theme.StudyCard.NoActionBar">>
+            android:theme="@style/Theme.StudyCard.NoActionBar">
         </activity>
     </application>
 </manifest>

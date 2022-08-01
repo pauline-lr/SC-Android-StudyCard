@@ -3,11 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <!--mettre tous les boutons du menu ici-->
     <group android:checkableBehavior="single">
         <item
             android:id="@id/homeFragment"
             android:icon="@drawable/home"
-            android:title="@string/menu_home"/>
-       </group>
-   </menu>
+            android:title="@string/menu_home" />
+        <item
+            android:id="@id/personnalInformationsFragment"
+            android:icon="@drawable/account"
+            android:title="@string/personnal_informations" />
+    </group>
+</menu>
+
+

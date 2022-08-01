@@ -4,6 +4,7 @@ import java.util.List;
 
 import be.henallux.studycard.models.Login;
 import be.henallux.studycard.repositories.web.dto.CardDto;
+import be.henallux.studycard.repositories.web.dto.ClientDto;
 import be.henallux.studycard.repositories.web.dto.DeckDto;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -30,8 +31,9 @@ public interface StudyCardWebService {
     @GET("cards")
     Call<List<DeckDto>> getCards();
 
-    /*@GET("/v1/card/all/{dek_id}")
-    Call<List<CardDto>> getCardsDeck(@Path("id") Integer deck_id);*/
     @GET("/v1/card/all/{id}")
     Call<List<CardDto>> getCardsDeck(@Path("id") Integer id);
+
+    @GET("/v1/client/{pseudo}")
+    Call<ClientDto> getClient(@Path("pseudo") String pseudo);
 }

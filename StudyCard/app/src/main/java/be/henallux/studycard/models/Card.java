@@ -32,10 +32,10 @@ public class Card {
     public String toString() {
         return "Card{" +
                 "id=" + id +
-                ", decks=" + deck +
-                ", category=" + category +
-                ", frontCard='" + frontCard + '\'' +
-                ", backCard='" + backCard + '\'' +
+                ", deck_id=" + deck +
+                ", category_id=" + category +
+                ", front_card='" + frontCard + '\'' +
+                ", back_card='" + backCard + '\'' +
                 '}';
     }
 }

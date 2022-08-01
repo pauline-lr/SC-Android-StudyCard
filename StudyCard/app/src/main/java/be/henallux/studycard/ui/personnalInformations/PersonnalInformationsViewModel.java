@@ -1,54 +1,48 @@
-package be.henallux.studycard.ui.home;
+package be.henallux.studycard.ui.personnalInformations;
 
 import android.app.Application;
-import android.os.Build;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import be.henallux.studycard.database.RetrofitConfigurationService;
 import be.henallux.studycard.database.StudyCardWebService;
+import be.henallux.studycard.database.mappers.ClientMapper;
 import be.henallux.studycard.database.mappers.DeckMapper;
-import be.henallux.studycard.models.Deck;
+import be.henallux.studycard.models.Client;
 import be.henallux.studycard.models.NetworkError;
-import be.henallux.studycard.repositories.web.dto.DeckDto;
+import be.henallux.studycard.repositories.web.dto.ClientDto;
 import be.henallux.studycard.utils.errors.NoConnectivityException;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeViewModel extends AndroidViewModel {
-    private MutableLiveData<List<Deck>> _decks = new MutableLiveData<>();
-    private LiveData<List<Deck>> decks = _decks;
+public class PersonnalInformationsViewModel extends AndroidViewModel {
+    private MutableLiveData<Client> _account = new MutableLiveData<>();
+    private LiveData<Client> account = _account;
 
     private MutableLiveData<NetworkError> _error = new MutableLiveData<>();
     private LiveData<NetworkError> error = _error;
 
-    private StudyCardWebService mStudyCardWebService;
-    private DeckMapper mDeckMapper;
+    private StudyCardWebService studyCardWebService;
+    private ClientMapper clientMapper;
 
-    public HomeViewModel(@NonNull Application application) {
+    public PersonnalInformationsViewModel(@NonNull Application application) {
         super(application);
-        this.mStudyCardWebService = RetrofitConfigurationService.getInstance(application).mStudyCardWebService();
-        this.mDeckMapper = DeckMapper.getInstance();
+        this.studyCardWebService = RetrofitConfigurationService.getInstance(application).mStudyCardWebService();
+        this.clientMapper = ClientMapper.getInstance();
     }
 
-    public void getAllDecksFromUser(String pseudo){
-        mStudyCardWebService.getDecksUser(pseudo).enqueue(new Callback<List<DeckDto>>() {
+    public void getClientFromWeb(String pseudo) {
+        studyCardWebService.getClient(pseudo).enqueue(new Callback<ClientDto>() {
             @Override
-            public void onResponse(@NotNull Call<List<DeckDto>> call, @NotNull Response<List<DeckDto>> response) {
+            public void onResponse(@NotNull Call<ClientDto> call, @NotNull Response<ClientDto> response) {
                 if (response.isSuccessful()) {
-                    List<Deck> newList = new ArrayList<>();
-                    response.body().forEach((deck -> newList.add(mDeckMapper.mapToDeck(deck))));
-                    _decks.setValue(newList);
+                    _account.setValue(clientMapper.mapToClient(response.body()));
                     _error.setValue(null);
                 } else {
                     _error.setValue(NetworkError.REQUEST_ERROR);
@@ -56,18 +50,19 @@ public class HomeViewModel extends AndroidViewModel {
             }
 
             @Override
-            public void onFailure(@NotNull Call<List<DeckDto>> call, @NotNull Throwable t) {
+            public void onFailure(@NotNull Call<ClientDto> call, @NotNull Throwable t) {
                 if (t instanceof NoConnectivityException) {
                     _error.setValue(NetworkError.NO_CONNECTION);
                 } else {
                     _error.setValue(NetworkError.TECHNICAL_ERROR);
                 }
+
             }
         });
     }
 
-    public LiveData<List<Deck>> getDecks() {
-        return decks;
+    public LiveData<Client> getAccount() {
+        return account;
     }
 
     public LiveData<NetworkError> getError() {
