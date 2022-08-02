@@ -34,6 +34,12 @@ public interface StudyCardWebService {
     @GET("/v1/card/all/{id}")
     Call<List<CardDto>> getCardsDeck(@Path("id") Integer id);
 
+    @GET("/v1/card/all/to-study/{id}")
+    Call<List<CardDto>> getCardsToStudyDeck(@Path("id") Integer id);
+
+    @GET("/v1/card/all/acquired/{id}")
+    Call<List<CardDto>> getCardsAcquiredOfDeck(@Path("id") Integer id);
+
     @GET("/v1/client/{pseudo}")
     Call<ClientDto> getClient(@Path("pseudo") String pseudo);
 }

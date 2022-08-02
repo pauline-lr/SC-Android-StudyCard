@@ -58,12 +58,15 @@ public class DeckFragment extends Fragment {
         mDeckAdapter = new DeckAdapter();
 
         id = getArguments().getInt(ARG_DECK_ID);
-        //id = 1;
-       deckName = getArguments().getString(ARG_DECK_NAME);
-    //deckName = "nom deck temp";
+        deckName = getArguments().getString(ARG_DECK_NAME);
 
         mDeckViewModel.getError().observe(getViewLifecycleOwner(), this::displayErrorScreen);
-        mFragmentDeckBinding.deckButton.setOnClickListener(view -> sendRequestStudyDeck());
+       // mFragmentDeckBinding.deckButton.setOnClickListener(view -> sendRequestStudyDeck());
+        mFragmentDeckBinding.deckButton.setVisibility(View.VISIBLE);
+
+        Bundle deckArgs = RevisionDeckFragment.newArguments(id, deckName);
+       mFragmentDeckBinding.deckButton.setOnClickListener(view ->  Navigation.findNavController(view)
+                .navigate(R.id.action_deckFragment_to_revsionDeckFragment, deckArgs));
 
         RecyclerView recyclerView = mFragmentDeckBinding.listAllCardsDeckRecyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -104,13 +107,13 @@ public class DeckFragment extends Fragment {
         //mHandler.removeCallbacks(updateAdapterRunnable);
     }
 
-    private void sendRequestStudyDeck(){
-/*        SharedPreferences sharedPreferences = getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
-        String pseudo = sharedPreferences.getString("pseudo", "vide");*/
+  /*   private void sendRequestStudyDeck(){
+       SharedPreferences sharedPreferences = getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
+        String pseudo = sharedPreferences.getString("pseudo", "vide");
         mDeckViewModel.getAllCardsFromDeck(id);
         mFragmentDeckBinding.progressBarCards.setVisibility(View.VISIBLE);
         mFragmentDeckBinding.listAllCardsDeckRecyclerView.setVisibility(View.GONE);
-    }
+    }*/
 
     private void displayErrorScreen(NetworkError error) {
         mFragmentDeckBinding.progressBarCards.setVisibility(View.GONE);
@@ -150,7 +153,12 @@ public class DeckFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(DeckViewHolder holder, int position) {
-            holder.mFrontCard.setText(mCards.get(position).frontCard);
+            String textInitFrontCard = mCards.get(position).frontCard;
+            String textFrontCard = textInitFrontCard.substring(0, Math.min(textInitFrontCard.length(), 20));
+            if(textInitFrontCard.length() > 20)
+                textFrontCard = textFrontCard + "...";
+            textFrontCard = (position + 1) + " - " + textFrontCard;
+            holder.mFrontCard.setText(textFrontCard);
         }
 
         @Override

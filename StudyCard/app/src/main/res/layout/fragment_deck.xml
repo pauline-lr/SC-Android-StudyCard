@@ -34,24 +34,24 @@
             android:paddingEnd="16dp"
             android:scrollbars="vertical"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/deck_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:enabled="true"
+            android:text="@string/revision_deck"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            app:layout_constraintTop_toTopOf="parent"/>
+
     </LinearLayout>
 
 
-    <Button
-        android:id="@+id/deck_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginTop="359dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="324dp"
-        android:enabled="true"
-        android:text="@string/revision_deck"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.546"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/deck_container" />
+
 
 
     <!--  <include

@@ -31,6 +31,11 @@
     <string name="mail_adress">Adresse mail</string>
     <string name="personnal_informations">Informations personnelles</string>
     <string name="logout">Se déconnecter</string>
+    <string name="to_study">A étudier</string>
+    <string name="zero">0</string>
+    <string name="acquired">Acquises</string>
+    <string name="revised_deck">Félicitations, vous avez terminé d\'étudier ce paquet !</string>
+    <string name="start">Commencer</string>
 
 
 </resources>
