@@ -28,6 +28,7 @@ import be.henallux.studycard.models.NetworkError;
 import be.henallux.studycard.ui.MainActivity;
 import be.henallux.studycard.ui.home.EmptyRecyclerView;
 import be.henallux.studycard.ui.home.HomeFragment;
+import be.henallux.studycard.utils.Utils;
 
 public class DeckFragment extends Fragment {
     private static final String ARG_DECK_ID = "deck_id";
@@ -172,10 +173,7 @@ public class DeckFragment extends Fragment {
         @Override
         public void onBindViewHolder(DeckViewHolder holder, int position) {
             String textInitFrontCard = mCards.get(position).frontCard;
-            String textFrontCard = textInitFrontCard.substring(0, Math.min(textInitFrontCard.length(), 20));
-            if (textInitFrontCard.length() > 20)
-                textFrontCard = textFrontCard + "...";
-            textFrontCard = (position + 1) + " - " + textFrontCard;
+            String textFrontCard = Utils.getFrontCardTextToList(textInitFrontCard, position);
             holder.mFrontCard.setText(textFrontCard);
         }
 

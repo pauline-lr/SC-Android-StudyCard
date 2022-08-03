@@ -28,8 +28,7 @@ public class PersonnalInformationsFragment extends Fragment {
     private FragmentPersonnalInformationsBinding mPersonnalInformationsBinding;
     private PersonnalInformationsViewModel mInformationsViewModel;
 
-    public PersonnalInformationsFragment() {
-    }
+    public PersonnalInformationsFragment() {}
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

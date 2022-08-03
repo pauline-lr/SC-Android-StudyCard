@@ -68,8 +68,8 @@ public class RevisionDeckFragment extends Fragment {
                     if (cards.size() == 0) {
                         mFragmentRevisionDeckBinding.revisedDeckText.setVisibility(View.VISIBLE);
                         mFragmentRevisionDeckBinding.toStudyButton.setEnabled(false);
-                        mFragmentRevisionDeckBinding.startButton.setText("Ré-étudier le paquet");
-                        mFragmentRevisionDeckBinding.revisedDeckText.setText("Félicitations, vous avez terminé d'étudier ce paquet !");
+                        mFragmentRevisionDeckBinding.startButton.setText(R.string.study_deck);
+                        mFragmentRevisionDeckBinding.revisedDeckText.setText(R.string.deck_finished_message);
                     } else {
                         mRevisionDeckAdapter.setCardToStudy(cards);
                         nbCardsToStudyAto.set(cards.size());

@@ -18,32 +18,6 @@
         android:paddingStart="16dp"
         android:paddingEnd="16dp">
 
-        <LinearLayout
-            android:id="@+id/error_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pseudo">
-
-            <ImageView
-                android:id="@+id/error_image"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                app:tint="@color/black"
-                tools:srcCompat="@drawable/ic_no_connectivity"
-                android:contentDescription="@string/http_no_connection" />
-
-            <TextView
-                android:id="@+id/error_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                tools:text="@string/http_no_connection" />
-        </LinearLayout>
-
         <EditText
             android:id="@+id/pseudo"
             android:layout_width="0dp"
@@ -110,6 +84,38 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/login_button"
             app:layout_constraintVertical_bias="0.146" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBaseline_toBottomOf="@id/register_button" />
+
+        <LinearLayout
+            android:id="@+id/error_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/register_button">
+
+            <ImageView
+                android:id="@+id/error_image"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                tools:srcCompat="@drawable/ic_no_wifi"
+                android:contentDescription="@string/http_no_connection" />
+
+            <TextView
+                android:id="@+id/error_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                tools:text="@string/http_no_connection" />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

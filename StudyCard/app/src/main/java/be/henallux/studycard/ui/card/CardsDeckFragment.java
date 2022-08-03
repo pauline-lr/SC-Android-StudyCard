@@ -23,6 +23,7 @@ import be.henallux.studycard.R;
 import be.henallux.studycard.databinding.FragmentCardsDeckBinding;
 import be.henallux.studycard.models.Card;
 import be.henallux.studycard.ui.MainActivity;
+import be.henallux.studycard.utils.Utils;
 
 public class CardsDeckFragment extends Fragment {
     private static final String ARG_DECK_ID = "deck_id";
@@ -59,7 +60,7 @@ public class CardsDeckFragment extends Fragment {
                     mCardsDeckAdapter.setCardToStudy(cardsList);
                 } else {
                     mCardsDeckAdapter.setCardAcquired(cardsList);
-                    mFragmentCardsDeckBinding.toStudyText.setText("Fiche(s) acquise(s)");
+                    mFragmentCardsDeckBinding.toStudyText.setText(R.string.cards_acquired);
                 }
                 mFragmentCardsDeckBinding.progressBar.setVisibility(View.GONE);
                 mFragmentCardsDeckBinding.recyclerView.setVisibility(View.VISIBLE);
@@ -151,10 +152,7 @@ public class CardsDeckFragment extends Fragment {
         @Override
         public void onBindViewHolder(CardDeckViewHolder holder, int position) {
             String textInitFrontCard = mCards.get(position).frontCard;
-            String textFrontCard = textInitFrontCard.substring(0, Math.min(textInitFrontCard.length(), 20));
-            if (textInitFrontCard.length() > 20)
-                textFrontCard = textFrontCard + "...";
-            textFrontCard = (position + 1) + " - " + textFrontCard;
+            String textFrontCard = Utils.getFrontCardTextToList(textInitFrontCard, position);
             holder.cardButton.setText(textFrontCard);
 
             /*Bundle cardArgs = CardFragment.newArguments(mCards.get(position));

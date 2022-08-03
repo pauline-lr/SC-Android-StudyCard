@@ -1,5 +1,6 @@
 package be.henallux.studycard.ui.login;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,7 +15,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import be.henallux.studycard.R;
 import be.henallux.studycard.databinding.FragmentLoginBinding;
+import be.henallux.studycard.models.NetworkError;
 import be.henallux.studycard.ui.MainActivity;
 
 public class LoginFragment extends Fragment {
@@ -30,8 +33,12 @@ public class LoginFragment extends Fragment {
         binding = FragmentLoginBinding.inflate(inflater, container, false);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
+        binding.progressBar.setVisibility(View.GONE);
 
-        binding.loginButton.setOnClickListener(view -> this.sendRequest());
+        binding.loginButton.setOnClickListener(view -> {
+            binding.progressBar.setVisibility(View.VISIBLE);
+            this.sendRequest();
+        });
 
         binding.registerButton.setOnClickListener(view -> Toast.makeText(getActivity(), "Fonctionnalité supplémentaire à développer" , Toast.LENGTH_SHORT ).show());
 
@@ -46,6 +53,7 @@ public class LoginFragment extends Fragment {
         viewModel.getTokenFromWeb(pseudo, password);
     }
     
+    @SuppressLint("UseCompatLoadingForDrawables")
     private void displayErrorScreen(be.henallux.studycard.models.NetworkError networkError) {
         if (networkError == null) {
             SharedPreferences sharedPref = requireContext().getSharedPreferences("login", Context.MODE_PRIVATE);
@@ -53,12 +61,21 @@ public class LoginFragment extends Fragment {
             editor.putString("token", viewModel.getToken().getValue());
             editor.putString("pseudo", binding.pseudo.getText().toString());
             editor.commit();
+            binding.progressBar.setVisibility(View.GONE);
+            binding.errorLayout.setVisibility(View.GONE);
             Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
-            Toast.makeText(getActivity(), "Bienvenue" , Toast.LENGTH_SHORT ).show();
+            Toast.makeText(getActivity(), R.string.welcome , Toast.LENGTH_SHORT ).show();
             return;
         }
-
-        Toast.makeText(getActivity(), "Pseudo ou mot de passe incorrect" , Toast.LENGTH_SHORT ).show();
+        if(networkError == NetworkError.NOT_FOUND){
+            Toast.makeText(getActivity(), R.string.incorrect_login_message , Toast.LENGTH_SHORT ).show();
+            binding.progressBar.setVisibility(View.GONE);
+        }else{
+            binding.progressBar.setVisibility(View.GONE);
+            binding.errorLayout.setVisibility(View.VISIBLE);
+            binding.errorImage.setImageDrawable(getResources().getDrawable(networkError.getErrorDrawable(), getActivity().getTheme()));
+            binding.errorText.setText(networkError.getErrorMessage());
+        }
     }
 }
