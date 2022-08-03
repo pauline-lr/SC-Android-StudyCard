@@ -37,7 +37,7 @@
                 <Button
                     android:id="@+id/to_study_button"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="start"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
@@ -52,8 +52,8 @@
 
                 <TextView
                     android:id="@+id/nb_cards_to_study"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="@string/zero"
                     android:textAlignment="textStart"
                     android:textSize="30sp"
@@ -85,15 +85,15 @@
 
                 <TextView
                     android:id="@+id/nb_cards_acquired"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="@string/zero"
                     android:textAlignment="textStart"
                     android:textSize="30sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@id/acquired_button"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
@@ -114,10 +114,8 @@
             android:id="@+id/start_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
             android:enabled="true"
+            android:layout_gravity="center"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:text="@string/start"
