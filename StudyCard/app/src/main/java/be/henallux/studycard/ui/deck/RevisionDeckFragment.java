@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import be.henallux.studycard.R;
 import be.henallux.studycard.databinding.FragmentRevisionDeckBinding;
 import be.henallux.studycard.models.Card;
 import be.henallux.studycard.ui.MainActivity;
+import be.henallux.studycard.ui.card.CardsDeckFragment;
 
 public class RevisionDeckFragment extends Fragment {
     private static final String ARG_DECK_ID = "deck_id";
@@ -26,7 +28,6 @@ public class RevisionDeckFragment extends Fragment {
 
     private int id;
     private String deckName;
-
 
     FragmentRevisionDeckBinding mFragmentRevisionDeckBinding;
     RevisionDeckViewModel mRevisionDeckViewModel;
@@ -73,6 +74,9 @@ public class RevisionDeckFragment extends Fragment {
                         mRevisionDeckAdapter.setCardToStudy(cards);
                         nbCardsToStudyAto.set(cards.size());
                         mFragmentRevisionDeckBinding.nbCardsToStudy.setText(String.valueOf(nbCardsToStudyAto));
+                        Bundle cardsArgs = CardsDeckFragment.newArguments(id, deckName, true);
+                        mFragmentRevisionDeckBinding.toStudyButton.setOnClickListener(view -> Navigation.findNavController(view)
+                                .navigate(R.id.action_RevisionDeckFragment_to_CardsDeckFragment, cardsArgs));
                     }
                 }
         );
@@ -80,9 +84,16 @@ public class RevisionDeckFragment extends Fragment {
         AtomicInteger nbCardsAcquiredAto = new AtomicInteger();
 
         mRevisionDeckViewModel.getCardsAcquired().observe(getViewLifecycleOwner(), cards -> {
-                    mRevisionDeckAdapter.setCardAcquired(cards);
-                    nbCardsAcquiredAto.set(cards.size());
-                    mFragmentRevisionDeckBinding.nbCardsAcquired.setText(String.valueOf(nbCardsAcquiredAto));
+                    if (cards.size() == 0) {
+                        mFragmentRevisionDeckBinding.acquiredButton.setEnabled(false);
+                    } else {
+                        mRevisionDeckAdapter.setCardAcquired(cards);
+                        nbCardsAcquiredAto.set(cards.size());
+                        mFragmentRevisionDeckBinding.nbCardsAcquired.setText(String.valueOf(nbCardsAcquiredAto));
+                        Bundle cardsArgs = CardsDeckFragment.newArguments(id, deckName, false);
+                        mFragmentRevisionDeckBinding.acquiredButton.setOnClickListener(view -> Navigation.findNavController(view)
+                                .navigate(R.id.action_RevisionDeckFragment_to_CardsDeckFragment, cardsArgs));
+                    }
                 }
         );
 

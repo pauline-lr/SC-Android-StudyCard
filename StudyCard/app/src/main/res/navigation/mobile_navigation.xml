@@ -30,15 +30,17 @@
         android:name="be.henallux.studycard.ui.deck.RevisionDeckFragment"
         android:label="revision_deck_fragment"
         tools:layout="@layout/fragment_revision_deck">
-        <!--    <argument
-            android:name="id"
-            app:argType="integer" />
-          <argument
-                android:name="deckName"
-                app:argType="string" />-->
-
+        <action
+            android:id="@+id/action_RevisionDeckFragment_to_CardsDeckFragment"
+            app:destination="@id/CardsDeckFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/CardsDeckFragment"
+        android:name="be.henallux.studycard.ui.card.CardsDeckFragment"
+        android:label="cards_deck_fragment"
+        tools:layout="@layout/fragment_cards_deck">
+    </fragment>
 
     <fragment
         android:id="@+id/personnalInformationsFragment"

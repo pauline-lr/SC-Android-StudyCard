@@ -27,6 +27,7 @@ import be.henallux.studycard.models.Deck;
 import be.henallux.studycard.models.NetworkError;
 import be.henallux.studycard.ui.MainActivity;
 import be.henallux.studycard.ui.home.EmptyRecyclerView;
+import be.henallux.studycard.ui.home.HomeFragment;
 
 public class DeckFragment extends Fragment {
     private static final String ARG_DECK_ID = "deck_id";
@@ -38,8 +39,7 @@ public class DeckFragment extends Fragment {
     FragmentDeckBinding mFragmentDeckBinding;
     DeckViewModel mDeckViewModel;
     DeckAdapter mDeckAdapter;
-
-
+    private Handler mHandler;
 
     public static Bundle newArguments(Deck deck) {
         Bundle args = new Bundle();
@@ -48,7 +48,34 @@ public class DeckFragment extends Fragment {
         return args;
     }
 
-    public DeckFragment() {}
+    public DeckFragment() {
+    }
+
+    private Runnable updateAdapterRunnable = new Runnable() {
+        @Override
+        public void run() {
+            mDeckViewModel.getAllCardsFromDeck(id);
+
+            mDeckViewModel.getCards().observe(getViewLifecycleOwner(), cardsList -> {
+                mDeckAdapter.setCard(cardsList);
+                mDeckViewModel.getCards().observe(getViewLifecycleOwner(), mDeckAdapter::setCard);
+                mFragmentDeckBinding.progressBar.setVisibility(View.GONE);
+                mFragmentDeckBinding.recyclerView.setVisibility(View.VISIBLE);
+                if(cardsList.size() == 0){
+                    mFragmentDeckBinding.deckButton.setVisibility(View.GONE);
+                }else{
+                    Bundle deckArgs = RevisionDeckFragment.newArguments(id, deckName);
+                    mFragmentDeckBinding.deckButton.setVisibility(View.VISIBLE);
+                    mFragmentDeckBinding.deckButton.setEnabled(true);
+                    mFragmentDeckBinding.deckButton.setOnClickListener(view -> Navigation.findNavController(view)
+                            .navigate(R.id.action_deckFragment_to_revsionDeckFragment, deckArgs));
+                }
+
+            });
+            mDeckViewModel.getError().observe(getViewLifecycleOwner(), DeckFragment.this::displayErrorScreen);
+        }
+    };
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,24 +88,15 @@ public class DeckFragment extends Fragment {
         deckName = getArguments().getString(ARG_DECK_NAME);
 
         mDeckViewModel.getError().observe(getViewLifecycleOwner(), this::displayErrorScreen);
-       // mFragmentDeckBinding.deckButton.setOnClickListener(view -> sendRequestStudyDeck());
-        mFragmentDeckBinding.deckButton.setVisibility(View.VISIBLE);
+        // mFragmentDeckBinding.deckButton.setOnClickListener(view -> sendRequestStudyDeck());
 
-        Bundle deckArgs = RevisionDeckFragment.newArguments(id, deckName);
-       mFragmentDeckBinding.deckButton.setOnClickListener(view ->  Navigation.findNavController(view)
-                .navigate(R.id.action_deckFragment_to_revsionDeckFragment, deckArgs));
-
-        RecyclerView recyclerView = mFragmentDeckBinding.listAllCardsDeckRecyclerView;
+        EmptyRecyclerView recyclerView = mFragmentDeckBinding.recyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        //recyclerView.setEmptyView(mFragmentDeckBinding.listAllCardsDeckRecyclerView);
+        recyclerView.setEmptyView(mFragmentDeckBinding.emptyView);
         recyclerView.setAdapter(mDeckAdapter);
         //mHandler = new Handler();
-        mDeckViewModel.getAllCardsFromDeck(id);
-        mDeckViewModel.getCards().observe(getViewLifecycleOwner(), mDeckAdapter::setCard);
-        mFragmentDeckBinding.progressBarCards.setVisibility(View.GONE);
-        mFragmentDeckBinding.listAllCardsDeckRecyclerView.setVisibility(View.VISIBLE);
 
+        mHandler = new Handler();
 
         return mFragmentDeckBinding.getRoot();
     }
@@ -87,7 +105,7 @@ public class DeckFragment extends Fragment {
     public void onResume() {
         ((MainActivity) getActivity()).setToolBarTitle(deckName);
         super.onResume();
-        //updateAdapterRunnable.run();
+        updateAdapterRunnable.run();
     }
 
 
@@ -104,7 +122,7 @@ public class DeckFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        //mHandler.removeCallbacks(updateAdapterRunnable);
+        mHandler.removeCallbacks(updateAdapterRunnable);
     }
 
   /*   private void sendRequestStudyDeck(){
@@ -116,14 +134,14 @@ public class DeckFragment extends Fragment {
     }*/
 
     private void displayErrorScreen(NetworkError error) {
-        mFragmentDeckBinding.progressBarCards.setVisibility(View.GONE);
+        mFragmentDeckBinding.progressBar.setVisibility(View.GONE);
         if (error == null) {
-            mFragmentDeckBinding.listAllCardsDeckRecyclerView.setVisibility(View.VISIBLE);
+            mFragmentDeckBinding.recyclerView.setVisibility(View.VISIBLE);
             //mFragmentDeckBinding.errorLayout.getRoot().setVisibility(View.GONE);
             return;
         }
         //mFragmentDeckBinding.errorLayout.getRoot().setVisibility(View.VISIBLE);
-        mFragmentDeckBinding.listAllCardsDeckRecyclerView.setVisibility(View.GONE);
+        mFragmentDeckBinding.recyclerView.setVisibility(View.GONE);
        /* mFragmentDeckBinding.errorLayout.errorText.setText(error.getErrorMessage());
         mFragmentDeckBinding.errorLayout.errorImage.setImageDrawable(getResources().getDrawable(error.getErrorDrawable(),
                 getActivity().getTheme()));
@@ -148,14 +166,14 @@ public class DeckFragment extends Fragment {
             View itemView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.card_layout, parent, false);
 
-            return new  DeckViewHolder(itemView);
+            return new DeckViewHolder(itemView);
         }
 
         @Override
         public void onBindViewHolder(DeckViewHolder holder, int position) {
             String textInitFrontCard = mCards.get(position).frontCard;
             String textFrontCard = textInitFrontCard.substring(0, Math.min(textInitFrontCard.length(), 20));
-            if(textInitFrontCard.length() > 20)
+            if (textInitFrontCard.length() > 20)
                 textFrontCard = textFrontCard + "...";
             textFrontCard = (position + 1) + " - " + textFrontCard;
             holder.mFrontCard.setText(textFrontCard);
