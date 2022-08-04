@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,7 +21,7 @@ import be.henallux.studycard.R;
 import be.henallux.studycard.databinding.FragmentRevisionDeckBinding;
 import be.henallux.studycard.models.Card;
 import be.henallux.studycard.ui.MainActivity;
-import be.henallux.studycard.ui.card.CardsDeckFragment;
+import be.henallux.studycard.ui.card.StudyCardFragment;
 
 public class RevisionDeckFragment extends Fragment {
     private static final String ARG_DECK_ID = "deck_id";
@@ -96,6 +97,10 @@ public class RevisionDeckFragment extends Fragment {
                     }
                 }
         );
+
+        Bundle cardsArgs = StudyCardFragment.newArguments(id, deckName, 0);
+        mFragmentRevisionDeckBinding.startButton.setOnClickListener(view -> Navigation.findNavController(view)
+                .navigate(R.id.action_RevisionDeckFragment_to_StudyCardFragment, cardsArgs));
 
         return mFragmentRevisionDeckBinding.getRoot();
     }

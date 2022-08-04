@@ -28,7 +28,8 @@ public class PersonnalInformationsFragment extends Fragment {
     private FragmentPersonnalInformationsBinding mPersonnalInformationsBinding;
     private PersonnalInformationsViewModel mInformationsViewModel;
 
-    public PersonnalInformationsFragment() {}
+    public PersonnalInformationsFragment() {
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -62,16 +63,15 @@ public class PersonnalInformationsFragment extends Fragment {
         mPersonnalInformationsBinding.progressBar.setVisibility(View.GONE);
         if (error == null) {
             mPersonnalInformationsBinding.personnalInformationsLayout.setVisibility(View.VISIBLE);
-            //mPersonnalInformationsBinding.errorLayout.getRoot().setVisibility(View.GONE);
+            mPersonnalInformationsBinding.errorLayout.getRoot().setVisibility(View.GONE);
             setValues();
             return;
         }
-        //mPersonnalInformationsBinding.errorLayout.getRoot().setVisibility(View.VISIBLE);
+        mPersonnalInformationsBinding.errorLayout.getRoot().setVisibility(View.VISIBLE);
         mPersonnalInformationsBinding.personnalInformationsLayout.setVisibility(View.GONE);
-       /* mPersonnalInformationsBinding.errorLayout.errorText.setText(error.getErrorMessage());
-        mPersonnalInformationsBinding.errorLayout.errorImage.setImageDrawable(getResources().getDrawable(error.getErrorDrawable(),
-                getActivity().getTheme()));
-        mPersonnalInformationsBinding.errorLayout.floatingActionButton.setOnClickListener(view -> this.sendRequestGetCustomer());*/
+        mPersonnalInformationsBinding.errorLayout.errorText.setText(error.getErrorMessage());
+        mPersonnalInformationsBinding.errorLayout.errorImage.setImageDrawable(getResources().getDrawable(error.getErrorDrawable(), getActivity().getTheme()));
+        mPersonnalInformationsBinding.errorLayout.floatingActionButton.setOnClickListener(view -> this.sendRequestGetCustomer());
     }
 
     private void setValues() {

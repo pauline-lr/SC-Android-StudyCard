@@ -40,5 +40,8 @@
     <string name="study_deck">Ré-étudier le paquet</string>
     <string name="deck_finished_message">Félicitations, vous avez terminé d\'étudier ce paquet !</string>
     <string name="cards_acquired">Fiche(s) acquise(s)</string>
+    <string name="front_card_ext">"Texte sur le recto de la carte "</string>
+    <string name="display_response">Afficher la réponse</string>
+    <string name="loading">Chargement...</string>
 
 </resources>

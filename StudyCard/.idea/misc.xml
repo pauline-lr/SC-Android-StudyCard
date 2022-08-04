@@ -10,7 +10,7 @@
         <entry key="..\:/Users/Pauline/AndroidStudioProjects/SC-StudyCard/StudyCard/app/src/main/res/layout/activity_home.xml" value="0.25407608695652173" />
         <entry key="..\:/Users/Pauline/AndroidStudioProjects/SC-StudyCard/StudyCard/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Pauline/AndroidStudioProjects/SC-StudyCard/StudyCard/app/src/main/res/layout/activity_main_content.xml" value="0.22282608695652173" />
-        <entry key="..\:/Users/Pauline/AndroidStudioProjects/SC-StudyCard/StudyCard/app/src/main/res/layout/card_button_layout.xml" value="0.253125" />
+        <entry key="..\:/Users/Pauline/AndroidStudioProjects/SC-StudyCard/StudyCard/app/src/main/res/layout/card_button_layout.xml" value="0.2037037037037037" />
         <entry key="..\:/Users/Pauline/AndroidStudioProjects/SC-StudyCard/StudyCard/app/src/main/res/layout/card_layout.xml" value="0.264" />
         <entry key="..\:/Users/Pauline/AndroidStudioProjects/SC-StudyCard/StudyCard/app/src/main/res/layout/deck_layout.xml" value="0.1" />
         <entry key="..\:/Users/Pauline/AndroidStudioProjects/SC-StudyCard/StudyCard/app/src/main/res/layout/fragment_card.xml" value="0.19701086956521738" />
@@ -22,6 +22,7 @@
         <entry key="..\:/Users/Pauline/AndroidStudioProjects/SC-StudyCard/StudyCard/app/src/main/res/layout/fragment_login.xml" value="0.21403508771929824" />
         <entry key="..\:/Users/Pauline/AndroidStudioProjects/SC-StudyCard/StudyCard/app/src/main/res/layout/fragment_personnal_informations.xml" value="0.1" />
         <entry key="..\:/Users/Pauline/AndroidStudioProjects/SC-StudyCard/StudyCard/app/src/main/res/layout/fragment_revision_deck.xml" value="0.264" />
+        <entry key="..\:/Users/Pauline/AndroidStudioProjects/SC-StudyCard/StudyCard/app/src/main/res/layout/fragment_study_card.xml" value="0.152" />
         <entry key="..\:/Users/Pauline/AndroidStudioProjects/SC-StudyCard/StudyCard/app/src/main/res/layout/login_activity.xml" value="0.1" />
         <entry key="..\:/Users/Pauline/AndroidStudioProjects/SC-StudyCard/StudyCard/app/src/main/res/layout/login_content.xml" value="0.11018518518518519" />
         <entry key="..\:/Users/Pauline/AndroidStudioProjects/SC-StudyCard/StudyCard/app/src/main/res/layout/main_app_bar.xml" value="0.1" />

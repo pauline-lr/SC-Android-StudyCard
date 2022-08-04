@@ -1,4 +1,4 @@
-package be.henallux.studycard.ui.card;
+package be.henallux.studycard.ui.deck;
 
 import android.os.Bundle;
 
@@ -23,6 +23,7 @@ import be.henallux.studycard.R;
 import be.henallux.studycard.databinding.FragmentCardsDeckBinding;
 import be.henallux.studycard.models.Card;
 import be.henallux.studycard.ui.MainActivity;
+import be.henallux.studycard.ui.card.StudyCardFragment;
 import be.henallux.studycard.utils.Utils;
 
 public class CardsDeckFragment extends Fragment {
@@ -45,7 +46,6 @@ public class CardsDeckFragment extends Fragment {
         args.putInt(ARG_DECK_ID, deck_id);
         args.putBoolean(IS_TO_STUDY_CARDS, is_to_study_cards);
         return args;
-
     }
 
     public CardsDeckFragment() {}
@@ -93,6 +93,10 @@ public class CardsDeckFragment extends Fragment {
         mFragmentCardsDeckBinding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mFragmentCardsDeckBinding.recyclerView.setEmptyView(mFragmentCardsDeckBinding.emptyView);
         mFragmentCardsDeckBinding.recyclerView.setAdapter(mCardsDeckAdapter);
+
+        Bundle cardsArgs = StudyCardFragment.newArguments(id, deckName, 0);
+        mFragmentCardsDeckBinding.startButton.setOnClickListener(view -> Navigation.findNavController(view)
+                .navigate(R.id.action_CardsDeckFragment_to_StudyCardFragment, cardsArgs));
 
         mHandler = new Handler();
 

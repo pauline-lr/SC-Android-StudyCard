@@ -1,4 +1,4 @@
-package be.henallux.studycard.ui.card;
+package be.henallux.studycard.ui.deck;
 
 import android.app.Application;
 

@@ -10,20 +10,20 @@
         android:name="be.henallux.studycard.ui.home.HomeFragment"
         android:label="home_fragment"
         tools:layout="@layout/fragment_home">
-       <action
+        <action
             android:id="@+id/action_homeFragment_to_deckFragment"
             app:destination="@id/deckFragment" />
 
     </fragment>
     <fragment
-      android:id="@+id/deckFragment"
-      android:name="be.henallux.studycard.ui.deck.DeckFragment"
-      android:label="deck_fragment"
-      tools:layout="@layout/fragment_deck">
+        android:id="@+id/deckFragment"
+        android:name="be.henallux.studycard.ui.deck.DeckFragment"
+        android:label="deck_fragment"
+        tools:layout="@layout/fragment_deck">
 
-      <action
-                 android:id="@+id/action_deckFragment_to_revsionDeckFragment"
-                 app:destination="@id/revsionDeckFragment" />
+        <action
+            android:id="@+id/action_deckFragment_to_revsionDeckFragment"
+            app:destination="@id/revsionDeckFragment" />
     </fragment>
     <fragment
         android:id="@+id/revsionDeckFragment"
@@ -33,19 +33,31 @@
         <action
             android:id="@+id/action_RevisionDeckFragment_to_CardsDeckFragment"
             app:destination="@id/CardsDeckFragment" />
+        <action
+            android:id="@+id/action_RevisionDeckFragment_to_StudyCardFragment"
+            app:destination="@id/StudyCardFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/CardsDeckFragment"
-        android:name="be.henallux.studycard.ui.card.CardsDeckFragment"
+        android:name="be.henallux.studycard.ui.deck.CardsDeckFragment"
         android:label="cards_deck_fragment"
         tools:layout="@layout/fragment_cards_deck">
+        <action
+            android:id="@+id/action_CardsDeckFragment_to_StudyCardFragment"
+            app:destination="@id/StudyCardFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/StudyCardFragment"
+        android:name="be.henallux.studycard.ui.card.StudyCardFragment"
+        android:label="study_card_fragment"
+        tools:layout="@layout/fragment_study_card" >
     </fragment>
 
     <fragment
         android:id="@+id/personnalInformationsFragment"
         android:name="be.henallux.studycard.ui.personnalInformations.PersonnalInformationsFragment"
         android:label="personnal_informations_fragment"
-        tools:layout="@layout/fragment_personnal_informations">
-    </fragment>
+        tools:layout="@layout/fragment_personnal_informations" />
 </navigation>
