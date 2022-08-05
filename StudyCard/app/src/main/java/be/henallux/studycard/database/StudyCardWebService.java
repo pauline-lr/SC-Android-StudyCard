@@ -2,13 +2,19 @@ package be.henallux.studycard.database;
 
 import java.util.List;
 
+import be.henallux.studycard.models.Card;
 import be.henallux.studycard.models.Login;
+import be.henallux.studycard.models.RevisionCategory;
 import be.henallux.studycard.repositories.web.dto.CardDto;
 import be.henallux.studycard.repositories.web.dto.ClientDto;
 import be.henallux.studycard.repositories.web.dto.DeckDto;
+import be.henallux.studycard.repositories.web.dto.RevisionCategoryDto;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -43,6 +49,12 @@ public interface StudyCardWebService {
     @GET("/v1/card/all/{id}/{pos}")
     Call<CardDto> getCardByPosition(@Path("id") Integer id, @Path("pos") Integer pos);
 
+    @GET("v1/category/{id}")
+    Call<RevisionCategoryDto> getCategory(@Path("id") Integer id);
+
     @GET("/v1/client/{pseudo}")
     Call<ClientDto> getClient(@Path("pseudo") String pseudo);
+
+    @PATCH("/v1/card/updateCategory/{id}/{category_id}")
+    Call<CardDto> updateCard(@Path("id") Integer id, @Path("category_id") Integer category_id);
 }

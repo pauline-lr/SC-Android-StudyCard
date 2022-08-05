@@ -18,6 +18,10 @@ public class CardMapper {
             return null;
         }
 
-        return new Card(dto.getId(), DeckMapper.getInstance().mapToDeck(dto.getDeck()), CategoryMapper.getInstance().mapToCategory(dto.getCategory()), dto.getFront_card(), dto.getBack_card());
+       return new Card(dto.getId(), DeckMapper.getInstance().mapToDeck(dto.getDeck()), CategoryMapper.getInstance().mapToCategory(dto.getCategory()), dto.getFront_card(), dto.getBack_card());
+    }
+
+    public CardDto mapToCardDto(Card card) {
+        return card == null ? null : new CardDto(card.id, DeckMapper.getInstance().mapToDeckDto(card.deck), CategoryMapper.getInstance().mapToCategoryDto(card.category), card.frontCard, card.backCard);
     }
 }

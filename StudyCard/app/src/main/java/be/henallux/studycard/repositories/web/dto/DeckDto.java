@@ -9,6 +9,12 @@ public class DeckDto {
     public ClientDto client;
     public String deck_name;
 
+    public DeckDto(Integer id, ClientDto client, String deck_name) {
+        this.id = id;
+        this.client = client;
+        this.deck_name = deck_name;
+    }
+
     public Integer getId() {
         return id;
     }

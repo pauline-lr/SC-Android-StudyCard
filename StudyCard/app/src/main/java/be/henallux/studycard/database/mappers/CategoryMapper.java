@@ -20,4 +20,13 @@ public class CategoryMapper {
 
         return new RevisionCategory(dto.getId(), dto.getCategoryName(), dto.getDifficultyOrder(), dto.getDescription());
     }
+
+
+    public RevisionCategoryDto mapToCategoryDto(RevisionCategory category) {
+        if (category == null) {
+            return null;
+        }
+
+        return new RevisionCategoryDto(category.id, category.categoryName, category.difficultyOrder, category.description);
+    }
 }

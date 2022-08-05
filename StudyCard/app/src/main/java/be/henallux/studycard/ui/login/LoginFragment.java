@@ -40,7 +40,7 @@ public class LoginFragment extends Fragment {
             this.sendRequest();
         });
 
-        binding.registerButton.setOnClickListener(view -> Toast.makeText(getActivity(), "Fonctionnalité supplémentaire à développer" , Toast.LENGTH_SHORT ).show());
+        binding.registerButton.setOnClickListener(view -> Toast.makeText(getActivity(), R.string.add_fonctionnality , Toast.LENGTH_SHORT ).show());
 
         viewModel.getError().observe(getViewLifecycleOwner(), this::displayErrorScreen);
 

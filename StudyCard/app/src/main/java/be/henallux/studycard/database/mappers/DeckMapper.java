@@ -20,4 +20,12 @@ public class DeckMapper {
 
         return new Deck(dto.getId(), ClientMapper.getInstance().mapToClient(dto.getClient()), dto.getDeck_name());
     }
+
+    public DeckDto mapToDeckDto(Deck deck) {
+        if (deck == null) {
+            return null;
+        }
+
+        return new DeckDto(deck.id, ClientMapper.getInstance().mapToClientDto(deck.client), deck.deckName);
+    }
 }

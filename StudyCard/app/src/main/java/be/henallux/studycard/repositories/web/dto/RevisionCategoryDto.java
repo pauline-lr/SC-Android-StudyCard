@@ -9,6 +9,13 @@ public class RevisionCategoryDto {
     public Integer difficultyOrder;
     public String description;
 
+    public RevisionCategoryDto(Integer id, String categoryName, Integer difficultyOrder, String description) {
+        this.id = id;
+        this.categoryName = categoryName;
+        this.difficultyOrder = difficultyOrder;
+        this.description = description;
+    }
+
     public Integer getId() {
         return id;
     }

@@ -53,6 +53,26 @@
         android:name="be.henallux.studycard.ui.card.StudyCardFragment"
         android:label="study_card_fragment"
         tools:layout="@layout/fragment_study_card" >
+        <action
+            android:id="@+id/action_StudyCardFragment_to_ResponseCardFragment"
+            app:destination="@id/ResponseCardFragment" />
+        <action
+            android:id="@+id/action_StudyCardFragment_to_RevisionDeckFragment"
+            app:destination="@id/revsionDeckFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/ResponseCardFragment"
+        android:name="be.henallux.studycard.ui.card.ResponseCardFragment"
+        android:label="response_card_fragment"
+        tools:layout="@layout/fragment_response_card" >
+        <action
+            android:id="@+id/action_ResponseCardFragment_to_StudyCardFragment"
+            app:destination="@id/StudyCardFragment" />
+        <action
+            android:id="@+id/action_ResponseCardFragment_to_RevisionDeckFragment"
+            app:destination="@id/revsionDeckFragment" />
     </fragment>
 
     <fragment

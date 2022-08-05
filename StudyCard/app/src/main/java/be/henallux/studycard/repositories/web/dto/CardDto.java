@@ -3,6 +3,8 @@ package be.henallux.studycard.repositories.web.dto;
 
 import com.squareup.moshi.Json;
 
+import be.henallux.studycard.models.Card;
+
 public class CardDto {
     @Json(name = "id") // JSON key
     public Integer id;
@@ -10,6 +12,14 @@ public class CardDto {
     public RevisionCategoryDto category;
     public String front_card;
     public String back_card;
+
+    public CardDto(Integer id, DeckDto deck, RevisionCategoryDto category, String front_card, String back_card) {
+        this.id = id;
+        this.deck = deck;
+        this.category = category;
+        this.front_card = front_card;
+        this.back_card = back_card;
+    }
 
     public Integer getId() {
         return id;

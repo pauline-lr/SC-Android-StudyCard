@@ -108,6 +108,8 @@ public class RevisionDeckFragment extends Fragment {
     @Override
     public void onResume() {
         ((MainActivity) getActivity()).setToolBarTitle(deckName);
+        ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        ((MainActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
         super.onResume();
     }
 

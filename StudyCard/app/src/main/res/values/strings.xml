@@ -30,7 +30,7 @@
     <string name="logout">Se déconnecter</string>
     <string name="to_study">A étudier</string>
     <string name="zero">0</string>
-    <string name="acquired">Acquises</string>
+    <string name="acquired">Acquise</string>
     <string name="revised_deck">Félicitations, vous avez terminé d\'étudier ce paquet !</string>
     <string name="start">Commencer</string>
     <string name="no_cards">Ce paquet est vide</string>
@@ -43,5 +43,11 @@
     <string name="front_card_ext">"Texte sur le recto de la carte "</string>
     <string name="display_response">Afficher la réponse</string>
     <string name="loading">Chargement...</string>
+    <string name="again">Encore</string>
+    <string name="difficult">Difficile</string>
+    <string name="correct">Correcte</string>
+    <string name="response">Réponse</string>
+    <string name="add_fonctionnality">Fonctionnalité supplémentaire à développer</string>
+    <string name="leave">Quitter</string>
 
 </resources>
