@@ -11,8 +11,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.net.HttpURLConnection;
 
-import be.henallux.studycard.database.RetrofitConfigurationService;
-import be.henallux.studycard.database.StudyCardWebService;
+import be.henallux.studycard.repositories.web.RetrofitConfigurationService;
+import be.henallux.studycard.repositories.web.StudyCardWebService;
 import be.henallux.studycard.models.Login;
 import be.henallux.studycard.models.NetworkError;
 import be.henallux.studycard.utils.errors.NoConnectivityException;

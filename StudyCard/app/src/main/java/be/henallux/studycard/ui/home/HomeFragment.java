@@ -65,20 +65,6 @@ public class HomeFragment  extends Fragment {
                     .navigate(R.id.action_homeFragment_to_deckFragment, deckArgs);
         });
 
-        /*sendRequestGetDecks();
-        mHomeViewModel.getDecks().observe(getViewLifecycleOwner(), deckList -> {
-            mAdapter.setOnItemClickListener((position, v) -> {
-                Bundle bundle = DeckFragment.newArguments(mAdapter.getItem(position));
-                Navigation.findNavController(v)
-                        .navigate(R.id.action_homeFragment_to_deckFragment, bundle);
-            });
-
-            mAdapter.setDecks(deckList);
-            mFragmentHomeBinding.progressBarDecks.setVisibility(View.GONE);
-            mFragmentHomeBinding.recyclerView.setVisibility(View.VISIBLE);
-        });
-        mHomeViewModel.getError().observe(getViewLifecycleOwner(), this::displayError);*/
-
         mFragmentHomeBinding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mFragmentHomeBinding.recyclerView.setEmptyView(mFragmentHomeBinding.emptyView);
         mFragmentHomeBinding.recyclerView.setAdapter(mAdapter);
@@ -114,15 +100,15 @@ public class HomeFragment  extends Fragment {
         mFragmentHomeBinding.progressBar.setVisibility(View.GONE);
         if (error == null) {
             mFragmentHomeBinding.recyclerView.setVisibility(View.VISIBLE);
-            //binding.errorLayout.getRoot().setVisibility(View.GONE);
+            mFragmentHomeBinding.errorLayout.setVisibility(View.GONE);
             return;
         }
-        //binding.errorLayout.getRoot().setVisibility(View.VISIBLE);
-        mFragmentHomeBinding.recyclerView.setVisibility(View.GONE);
-        //binding.errorLayout.errorText.setText(error.getErrorMessage());
-        // binding.errorLayout.errorImage.setImageDrawable(getResources().getDrawable(error.getErrorDrawable(),
-        //                getActivity().getTheme()));
-        //binding.errorLayout.floatingActionButton.setOnClickListener(view -> this.sendRequestGetDecks());
+        if(error != NetworkError.NOT_FOUND){
+            mFragmentHomeBinding.errorLayout.setVisibility(View.VISIBLE);
+            mFragmentHomeBinding.recyclerView.setVisibility(View.GONE);
+            mFragmentHomeBinding.errorImage.setImageDrawable(getResources().getDrawable(error.getErrorDrawable(), getActivity().getTheme()));
+            mFragmentHomeBinding.errorText.setText(error.getErrorMessage());
+        }
     }
 
 

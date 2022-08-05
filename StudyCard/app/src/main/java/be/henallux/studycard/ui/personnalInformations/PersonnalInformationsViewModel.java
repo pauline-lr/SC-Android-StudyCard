@@ -9,9 +9,9 @@ import androidx.lifecycle.MutableLiveData;
 
 import org.jetbrains.annotations.NotNull;
 
-import be.henallux.studycard.database.RetrofitConfigurationService;
-import be.henallux.studycard.database.StudyCardWebService;
-import be.henallux.studycard.database.mappers.ClientMapper;
+import be.henallux.studycard.repositories.web.RetrofitConfigurationService;
+import be.henallux.studycard.repositories.web.StudyCardWebService;
+import be.henallux.studycard.services.mappers.ClientMapper;
 import be.henallux.studycard.models.Client;
 import be.henallux.studycard.models.NetworkError;
 import be.henallux.studycard.repositories.web.dto.ClientDto;

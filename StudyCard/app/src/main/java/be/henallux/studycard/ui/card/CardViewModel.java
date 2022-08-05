@@ -1,30 +1,25 @@
 package be.henallux.studycard.ui.card;
 
 import android.app.Application;
-import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import be.henallux.studycard.database.mappers.RevisionCategoryMapper;
+import be.henallux.studycard.services.mappers.RevisionCategoryMapper;
 import be.henallux.studycard.models.Card;
-import be.henallux.studycard.models.Deck;
 import be.henallux.studycard.models.NetworkError;
-import be.henallux.studycard.database.RetrofitConfigurationService;
-import be.henallux.studycard.database.StudyCardWebService;
+import be.henallux.studycard.repositories.web.RetrofitConfigurationService;
+import be.henallux.studycard.repositories.web.StudyCardWebService;
 import be.henallux.studycard.models.RevisionCategory;
 import be.henallux.studycard.repositories.web.dto.CardDto;
-import be.henallux.studycard.database.mappers.CardMapper;
+import be.henallux.studycard.services.mappers.CardMapper;
 import be.henallux.studycard.repositories.web.dto.RevisionCategoryDto;
 import be.henallux.studycard.utils.errors.NoConnectivityException;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Locale;
-
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

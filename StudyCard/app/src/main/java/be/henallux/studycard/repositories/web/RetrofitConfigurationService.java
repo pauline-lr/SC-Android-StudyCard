@@ -1,4 +1,4 @@
-package be.henallux.studycard.database;
+package be.henallux.studycard.repositories.web;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -8,16 +8,13 @@ import com.google.gson.GsonBuilder;
 import com.squareup.moshi.Moshi;
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory;
 
-import java.io.IOException;
 import java.util.Date;
 
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter;
 
 import be.henallux.studycard.utils.ConnectivityCheckInterceptor;
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

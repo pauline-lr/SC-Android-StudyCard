@@ -1,7 +1,7 @@
 package be.henallux.studycard.ui.personnalInformations;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -13,34 +13,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Objects;
 
 import be.henallux.studycard.R;
 import be.henallux.studycard.databinding.FragmentPersonnalInformationsBinding;
 import be.henallux.studycard.models.NetworkError;
 import be.henallux.studycard.ui.MainActivity;
-import be.henallux.studycard.ui.login.LoginActivity;
 
 public class PersonnalInformationsFragment extends Fragment {
     private FragmentPersonnalInformationsBinding mPersonnalInformationsBinding;
-    private PersonnalInformationsViewModel mInformationsViewModel;
+    private PersonnalInformationsViewModel viewModel;
 
     public PersonnalInformationsFragment() {
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mInformationsViewModel = new ViewModelProvider(this).get(PersonnalInformationsViewModel.class);
+        viewModel = new ViewModelProvider(this).get(PersonnalInformationsViewModel.class);
 
         mPersonnalInformationsBinding = FragmentPersonnalInformationsBinding.inflate(inflater, container, false);
-        mPersonnalInformationsBinding.setViewModel(mInformationsViewModel);
-        mPersonnalInformationsBinding.setLifecycleOwner(this);
+        mPersonnalInformationsBinding.setViewModel(viewModel);
+        mPersonnalInformationsBinding.setLifecycleOwner(this.getViewLifecycleOwner());
 
-        this.sendRequestGetCustomer();
-        mInformationsViewModel.getError().observe(getViewLifecycleOwner(), this::displayErrorScreen);
+        this.sendRequestGetClient();
+        viewModel.getError().observe(getViewLifecycleOwner(), this::displayErrorScreen);
 
         return mPersonnalInformationsBinding.getRoot();
     }
@@ -51,34 +47,44 @@ public class PersonnalInformationsFragment extends Fragment {
         super.onResume();
     }
 
-    private void sendRequestGetCustomer() {
+    private void sendRequestGetClient() {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
         String pseudo = sharedPreferences.getString("pseudo", "vide");
-        mInformationsViewModel.getClientFromWeb(pseudo);
+        viewModel.getClientFromWeb(pseudo);
         mPersonnalInformationsBinding.progressBar.setVisibility(View.VISIBLE);
-        mPersonnalInformationsBinding.personnalInformationsLayout.setVisibility(View.GONE);
+        //mPersonnalInformationsBinding.personnalInformationsLayout.setVisibility(View.GONE);
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private void displayErrorScreen(NetworkError error) {
         mPersonnalInformationsBinding.progressBar.setVisibility(View.GONE);
+
         if (error == null) {
             mPersonnalInformationsBinding.personnalInformationsLayout.setVisibility(View.VISIBLE);
-            mPersonnalInformationsBinding.errorLayout.getRoot().setVisibility(View.GONE);
+            mPersonnalInformationsBinding.errorLayout.setVisibility(View.GONE);
+            changeVisibilityInformationsUser(View.VISIBLE);
             setValues();
             return;
+        } else {
+            changeVisibilityInformationsUser(View.GONE);
+            mPersonnalInformationsBinding.errorLayout.setVisibility(View.VISIBLE);
+            mPersonnalInformationsBinding.errorImage.setImageDrawable(getResources().getDrawable(error.getErrorDrawable(), requireActivity().getTheme()));
+            mPersonnalInformationsBinding.errorText.setText(error.getErrorMessage());
         }
-        mPersonnalInformationsBinding.errorLayout.getRoot().setVisibility(View.VISIBLE);
-        mPersonnalInformationsBinding.personnalInformationsLayout.setVisibility(View.GONE);
-        mPersonnalInformationsBinding.errorLayout.errorText.setText(error.getErrorMessage());
-        mPersonnalInformationsBinding.errorLayout.errorImage.setImageDrawable(getResources().getDrawable(error.getErrorDrawable(), getActivity().getTheme()));
-        mPersonnalInformationsBinding.errorLayout.floatingActionButton.setOnClickListener(view -> this.sendRequestGetCustomer());
+    }
+
+    private void changeVisibilityInformationsUser(Integer visibility) {
+        mPersonnalInformationsBinding.pseudo.setVisibility(visibility);
+        mPersonnalInformationsBinding.pseudoTitle.setVisibility(visibility);
+        mPersonnalInformationsBinding.emailAdress.setVisibility(visibility);
+        mPersonnalInformationsBinding.emailAdressTitle.setVisibility(visibility);
     }
 
     private void setValues() {
-        String pseudoText = Objects.requireNonNull(mInformationsViewModel.getAccount().getValue()).pseudo;
+        String pseudoText = Objects.requireNonNull(viewModel.getAccount().getValue()).pseudo;
         mPersonnalInformationsBinding.pseudo.setText(pseudoText);
 
-        String emailText = mInformationsViewModel.getAccount().getValue().email;
+        String emailText = viewModel.getAccount().getValue().email;
         mPersonnalInformationsBinding.pseudo.setText(emailText);
     }
 }

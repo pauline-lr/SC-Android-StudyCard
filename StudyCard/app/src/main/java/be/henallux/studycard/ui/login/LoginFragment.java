@@ -32,7 +32,7 @@ public class LoginFragment extends Fragment {
 
         binding = FragmentLoginBinding.inflate(inflater, container, false);
         binding.setViewModel(viewModel);
-        binding.setLifecycleOwner(this);
+        binding.setLifecycleOwner(this.getViewLifecycleOwner());
         binding.progressBar.setVisibility(View.GONE);
 
         binding.loginButton.setOnClickListener(view -> {

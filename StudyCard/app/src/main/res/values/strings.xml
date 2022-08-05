@@ -2,7 +2,7 @@
     <string name="app_name">StudyCard</string>
 
     <string name="http_no_connection">Pas de connexion</string>
-    <string name="request_error">Une erreur est survenue</string>
+    <string name="request_error">Requête invalide</string>
     <string name="technical_error">Une erreur inattendue est survenue, veuillez réessayer plus tard.</string>
     <string name="not_found">Contenu non trouvé</string>
     <string name="pseudo">pseudo</string>

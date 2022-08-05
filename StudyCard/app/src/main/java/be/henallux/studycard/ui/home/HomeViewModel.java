@@ -1,10 +1,8 @@
 package be.henallux.studycard.ui.home;
 
 import android.app.Application;
-import android.os.Build;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -14,9 +12,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.henallux.studycard.database.RetrofitConfigurationService;
-import be.henallux.studycard.database.StudyCardWebService;
-import be.henallux.studycard.database.mappers.DeckMapper;
+import be.henallux.studycard.repositories.web.RetrofitConfigurationService;
+import be.henallux.studycard.repositories.web.StudyCardWebService;
+import be.henallux.studycard.services.mappers.DeckMapper;
 import be.henallux.studycard.models.Deck;
 import be.henallux.studycard.models.NetworkError;
 import be.henallux.studycard.repositories.web.dto.DeckDto;

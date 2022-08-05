@@ -1,4 +1,4 @@
-package be.henallux.studycard.database.mappers;
+package be.henallux.studycard.services.mappers;
 
 import be.henallux.studycard.models.RevisionCategory;
 import be.henallux.studycard.repositories.web.dto.RevisionCategoryDto;
