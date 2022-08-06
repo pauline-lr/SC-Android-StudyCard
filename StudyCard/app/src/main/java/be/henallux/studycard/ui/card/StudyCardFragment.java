@@ -27,9 +27,7 @@ public class StudyCardFragment extends Fragment {
     private static final String ARG_DECK_NAME = "deck_name";
     private static final String ARG_POSITION = "position";
 
-    private int id;
     private String deckName;
-    private int position;
 
     FragmentStudyCardBinding mFragmentStudyCardBinding;
     CardViewModel mCardViewModel;
@@ -53,15 +51,13 @@ public class StudyCardFragment extends Fragment {
         mCardAdapter = new CardAdapter();
 
         assert getArguments() != null;
-        id = getArguments().getInt(ARG_DECK_ID);
+        int id = getArguments().getInt(ARG_DECK_ID);
         deckName = getArguments().getString(ARG_DECK_NAME);
-        position = getArguments().getInt(ARG_POSITION);
+        int position = getArguments().getInt(ARG_POSITION);
 
         mCardViewModel.getError().observe(getViewLifecycleOwner(), this::displayErrorScreen);
 
         mCardViewModel.getCardByPositionFromWeb(id, position);
-
-        //mStudyCardViewModel.getCard().observe(getViewLifecycleOwner(), mCardAdapter::setCard);
 
         Bundle cardsArgs = ResponseCardFragment.newArguments(id, deckName, position);
         mFragmentStudyCardBinding.displayResponseButton.setOnClickListener(view -> Navigation.findNavController(view)
@@ -77,18 +73,19 @@ public class StudyCardFragment extends Fragment {
     private void displayErrorScreen(NetworkError error) {
         if (error == null) {
             mFragmentStudyCardBinding.cardsInformationsLayout.setVisibility(View.VISIBLE);
-            //mFragmentStudyCardBinding.errorLayout.getRoot().setVisibility(View.GONE);
+            mFragmentStudyCardBinding.errorLayout.setVisibility(View.GONE);
             mFragmentStudyCardBinding.displayResponseButton.setEnabled(true);
             Card card = mCardViewModel.getCard().getValue();
+            assert card != null;
             mFragmentStudyCardBinding.frontCardText.setText(card.frontCard);
             return;
         }
-        /*mFragmentStudyCardBinding.errorLayout.getRoot().setVisibility(View.VISIBLE);
-        mFragmentStudyCardBinding.cardsInformationsLayout.setVisibility(View.GONE);
-        mFragmentStudyCardBinding.errorLayout.errorText.setText(error.getErrorMessage());
-        mFragmentStudyCardBinding.errorLayout.errorImage.setImageDrawable(getResources().getDrawable(error.getErrorDrawable(),
-                getActivity().getTheme()));
-        mFragmentStudyCardBinding.errorLayout.floatingActionButton.setOnClickListener(view -> this.sendRequestGetCustomer());*/
+        mFragmentStudyCardBinding.frontCardText.setVisibility(error == NetworkError.NOT_FOUND ? View.VISIBLE : View.GONE);
+        mFragmentStudyCardBinding.displayResponseButton.setVisibility(error == NetworkError.NOT_FOUND ? View.VISIBLE : View.GONE);
+        mFragmentStudyCardBinding.leaveButton.setVisibility(error == NetworkError.NOT_FOUND ? View.VISIBLE : View.GONE);
+        mFragmentStudyCardBinding.errorLayout.setVisibility(View.VISIBLE);
+        mFragmentStudyCardBinding.errorImage.setImageDrawable(getResources().getDrawable(error.getErrorDrawable(), getActivity().getTheme()));
+        mFragmentStudyCardBinding.errorText.setText(error.getErrorMessage());
     }
 
     @Override

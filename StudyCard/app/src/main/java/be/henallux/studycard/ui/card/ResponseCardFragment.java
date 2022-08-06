@@ -76,7 +76,6 @@ public class ResponseCardFragment extends Fragment {
     private void displayErrorScreen(NetworkError error) {
         if (error == null) {
             mFragmentResponseCardBinding.cardsInformationsLayout.setVisibility(View.VISIBLE);
-            //mFragmentResponseCardBinding.errorLayout.getRoot().setVisibility(View.GONE);
             Card card = mCardViewModel.getCard().getValue();
             assert card != null;
             mFragmentResponseCardBinding.frontCardText.setText(card.frontCard);
@@ -104,13 +103,17 @@ public class ResponseCardFragment extends Fragment {
             });
             return;
         }
-        /*mFragmentResponseCardBinding.errorLayout.getRoot().setVisibility(View.VISIBLE);
-        mFragmentResponseCardBinding.cardsInformationsLayout.setVisibility(View.GONE);
-        mFragmentResponseCardBinding.errorLayout.errorText.setText(error.getErrorMessage());
-        mFragmentResponseCardBinding.errorLayout.errorImage.setImageDrawable(getResources().getDrawable(error.getErrorDrawable(),
-                getActivity().getTheme()));
-        mFragmentResponseCardBinding.errorLayout.floatingActionButton.setOnClickListener(view -> this.sendRequestGetCustomer());*/
+        mFragmentResponseCardBinding.frontCardText.setVisibility(View.GONE);
+        mFragmentResponseCardBinding.backCardText.setVisibility(View.GONE);
+        mFragmentResponseCardBinding.lineDrawable.setVisibility(View.GONE);
+        mFragmentResponseCardBinding.leaveButton.setVisibility(View.GONE);
+        mFragmentResponseCardBinding.revisionCategoryContainer.setVisibility(View.GONE);
+        mFragmentResponseCardBinding.errorLayout.setVisibility(View.VISIBLE);
+        mFragmentResponseCardBinding.errorImage.setImageDrawable(getResources().getDrawable(error.getErrorDrawable(), getActivity().getTheme()));
+        mFragmentResponseCardBinding.errorText.setText(error.getErrorMessage());
     }
+
+
 
     @Override
     public void onResume() {
