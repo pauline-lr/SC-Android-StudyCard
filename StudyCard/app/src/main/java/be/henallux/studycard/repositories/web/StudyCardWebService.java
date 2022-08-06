@@ -33,6 +33,9 @@ public interface StudyCardWebService {
     @GET("cards")
     Call<List<DeckDto>> getCards();
 
+    @GET("/v1/card/{id}")
+    Call<CardDto> getCard(@Path("id") Integer id);
+
     @GET("/v1/card/all/{id}")
     Call<List<CardDto>> getCardsDeck(@Path("id") Integer id);
 

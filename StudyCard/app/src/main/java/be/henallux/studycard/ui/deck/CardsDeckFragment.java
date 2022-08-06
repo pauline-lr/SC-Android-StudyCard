@@ -22,8 +22,12 @@ import java.util.List;
 import be.henallux.studycard.R;
 import be.henallux.studycard.databinding.FragmentCardsDeckBinding;
 import be.henallux.studycard.models.Card;
+import be.henallux.studycard.models.Deck;
+import be.henallux.studycard.models.NetworkError;
 import be.henallux.studycard.ui.MainActivity;
+import be.henallux.studycard.ui.card.CardFragment;
 import be.henallux.studycard.ui.card.StudyCardFragment;
+import be.henallux.studycard.ui.home.HomeFragment;
 import be.henallux.studycard.utils.Utils;
 
 public class CardsDeckFragment extends Fragment {
@@ -65,7 +69,7 @@ public class CardsDeckFragment extends Fragment {
                 mFragmentCardsDeckBinding.progressBar.setVisibility(View.GONE);
                 mFragmentCardsDeckBinding.recyclerView.setVisibility(View.VISIBLE);
             });
-            //mCardsDeckViewModel.getError().observe(getViewLifecycleOwner(), this::displayError);
+            mCardsDeckViewModel.getError().observe(getViewLifecycleOwner(), CardsDeckFragment.this::displayError);
         }
     };
 
@@ -80,15 +84,11 @@ public class CardsDeckFragment extends Fragment {
         deckName = getArguments().getString(ARG_DECK_NAME);
         isToStudyCards = getArguments().getBoolean(IS_TO_STUDY_CARDS);
 
-        /*mCardsDeckAdapter.setOnItemClickListener((position, v) -> {
+        mCardsDeckAdapter.setOnItemClickListener((position, v) -> {
             assert mCardsDeckAdapter.getItem(position) != null;
-            Bundle cardArgs = CardFragment.newArguments(mCardsDeckAdapter.getItem(position));
-            Navigation.findNavController(v)
-                    .navigate(R.id., cardArgs);
-        });*/
-
-        // mCardsDeckViewModel.getError().observe(getViewLifecycleOwner(), this::displayErrorScreen);
-        // mFragmentCardsDeckBinding.revisionDeckButton.setOnClickListener(view -> sendRequestStudyDeckDeck());
+            Bundle cardArgs = CardFragment.newArguments(mCardsDeckAdapter.getItem(position).id, deckName);
+            Navigation.findNavController(v).navigate(R.id.action_CardsDeckFragment_to_CardFragment, cardArgs);
+        });
 
         mFragmentCardsDeckBinding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mFragmentCardsDeckBinding.recyclerView.setEmptyView(mFragmentCardsDeckBinding.emptyView);
@@ -106,7 +106,6 @@ public class CardsDeckFragment extends Fragment {
     @Override
     public void onResume() {
         ((MainActivity) requireActivity()).setToolBarTitle(deckName);
-        
         super.onResume();
         updateAdapterRunnable.run();
     }
@@ -117,25 +116,24 @@ public class CardsDeckFragment extends Fragment {
         mHandler.removeCallbacks(updateAdapterRunnable);
     }
 
-    /*private void displayError(NetworkError error) {
-        mFragmentHomeBinding.progressBar.setVisibility(View.GONE);
+    private void displayError(NetworkError error) {
+        mFragmentCardsDeckBinding.progressBar.setVisibility(View.GONE);
         if (error == null) {
-            mFragmentHomeBinding.recyclerView.setVisibility(View.VISIBLE);
-            //binding.errorLayout.getRoot().setVisibility(View.GONE);
+            mFragmentCardsDeckBinding.recyclerView.setVisibility(View.VISIBLE);
+            mFragmentCardsDeckBinding.errorLayout.setVisibility(View.GONE);
             return;
         }
-        //binding.errorLayout.getRoot().setVisibility(View.VISIBLE);
-        mFragmentHomeBinding.recyclerView.setVisibility(View.GONE);
-        //binding.errorLayout.errorText.setText(error.getErrorMessage());
-        // binding.errorLayout.errorImage.setImageDrawable(getResources().getDrawable(error.getErrorDrawable(),
-        //                getActivity().getTheme()));
-        //binding.errorLayout.floatingActionButton.setOnClickListener(view -> this.sendRequestGetDecks());
-    }*/
-
+        mFragmentCardsDeckBinding.emptyView.setVisibility(error == NetworkError.NOT_FOUND ? View.VISIBLE : View.GONE);
+        mFragmentCardsDeckBinding.startButton.setVisibility(error == NetworkError.NOT_FOUND ? View.VISIBLE : View.GONE);
+        mFragmentCardsDeckBinding.errorLayout.setVisibility(View.VISIBLE);
+        mFragmentCardsDeckBinding.recyclerView.setVisibility(View.GONE);
+        mFragmentCardsDeckBinding.errorImage.setImageDrawable(getResources().getDrawable(error.getErrorDrawable(), getActivity().getTheme()));
+        mFragmentCardsDeckBinding.errorText.setText(error.getErrorMessage());
+    }
 
     private static class CardsDeckAdapter extends RecyclerView.Adapter<CardDeckViewHolder> {
         private List<Card> mCards;
-        private static CardsDeckAdapter.ClickListener clickListener;
+        private static ClickListener clickListener;
 
         public void setCardToStudy(List<Card> cards) {
             this.mCards = cards;
@@ -160,10 +158,10 @@ public class CardsDeckFragment extends Fragment {
             String textFrontCard = Utils.getFrontCardTextToList(textInitFrontCard, position);
             holder.cardButton.setText(textFrontCard);
 
-            /*Bundle cardArgs = CardFragment.newArguments(mCards.get(position));
-            holder.deckButton.setOnClickListener(view ->  {
-                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_deckFragment, deckArgs);
-            });*/
+            Bundle cardArgs = CardFragment.newArguments(mCards.get(position).id, "Nom du deck");
+            holder.cardButton.setOnClickListener(view -> {
+                Navigation.findNavController(view).navigate(R.id.action_CardsDeckFragment_to_CardFragment, cardArgs);
+            });
         }
 
         public Card getItem(int position) {
@@ -175,8 +173,7 @@ public class CardsDeckFragment extends Fragment {
             return mCards == null ? 0 : mCards.size();
         }
 
-
-        public void setOnItemClickListener(CardsDeckAdapter.ClickListener clickListener) {
+        public void setOnItemClickListener(ClickListener clickListener) {
             this.clickListener = clickListener;
         }
 

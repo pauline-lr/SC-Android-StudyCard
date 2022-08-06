@@ -59,7 +59,7 @@ public class StudyCardFragment extends Fragment {
 
         mCardViewModel.getError().observe(getViewLifecycleOwner(), this::displayErrorScreen);
 
-        mCardViewModel.getCardFromWeb(id, position);
+        mCardViewModel.getCardByPositionFromWeb(id, position);
 
         //mStudyCardViewModel.getCard().observe(getViewLifecycleOwner(), mCardAdapter::setCard);
 

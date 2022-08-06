@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <be.henallux.studycard.ui.home.EmptyRecyclerView
+        <be.henallux.studycard.ui.EmptyRecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -7,15 +7,12 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import be.henallux.studycard.services.mappers.RevisionCategoryMapper;
 import be.henallux.studycard.models.Card;
 import be.henallux.studycard.models.NetworkError;
 import be.henallux.studycard.repositories.web.RetrofitConfigurationService;
 import be.henallux.studycard.repositories.web.StudyCardWebService;
-import be.henallux.studycard.models.RevisionCategory;
 import be.henallux.studycard.repositories.web.dto.CardDto;
 import be.henallux.studycard.services.mappers.CardMapper;
-import be.henallux.studycard.repositories.web.dto.RevisionCategoryDto;
 import be.henallux.studycard.utils.errors.NoConnectivityException;
 
 import org.jetbrains.annotations.NotNull;
@@ -26,27 +23,22 @@ import retrofit2.Response;
 
 
 public class CardViewModel extends AndroidViewModel {
-    private MutableLiveData<Card> _card = new MutableLiveData<>();
-    private LiveData<Card> card = _card;
+    private final MutableLiveData<Card> _card = new MutableLiveData<>();
+    private final LiveData<Card> card = _card;
 
-    private MutableLiveData<RevisionCategory> _category = new MutableLiveData<>();
-    private LiveData<RevisionCategory> category = _category;
+    private final MutableLiveData<NetworkError> _error = new MutableLiveData<>();
+    private final LiveData<NetworkError> error = _error;
 
-    private MutableLiveData<NetworkError> _error = new MutableLiveData<>();
-    private LiveData<NetworkError> error = _error;
-
-    private StudyCardWebService studyCardWebService;
-    private CardMapper cardMapper;
-    private RevisionCategoryMapper mRevisionCategoryMapper;
+    private final StudyCardWebService studyCardWebService;
+    private final CardMapper cardMapper;
 
     public CardViewModel(@NonNull Application application) {
         super(application);
         this.studyCardWebService = RetrofitConfigurationService.getInstance(application).mStudyCardWebService();
         this.cardMapper = CardMapper.getInstance();
-        this.mRevisionCategoryMapper = RevisionCategoryMapper.getInstance();
     }
 
-    public void getCardFromWeb(Integer card_id, Integer position) {
+    public void getCardByPositionFromWeb(Integer card_id, Integer position) {
         studyCardWebService.getCardByPosition(card_id, position).enqueue(new Callback<CardDto>() {
             @Override
             public void onResponse(@NotNull Call<CardDto> call, @NotNull Response<CardDto> response) {
@@ -70,12 +62,12 @@ public class CardViewModel extends AndroidViewModel {
         });
     }
 
-    public void getCategoryFromWeb(Integer category_id) {
-        studyCardWebService.getCategory(category_id).enqueue(new Callback<RevisionCategoryDto>() {
+    public void getCardFromWeb(Integer card_id) {
+        studyCardWebService.getCard(card_id).enqueue(new Callback<CardDto>() {
             @Override
-            public void onResponse(@NotNull Call<RevisionCategoryDto> call, @NotNull Response<RevisionCategoryDto> response) {
+            public void onResponse(@NotNull Call<CardDto> call, @NotNull Response<CardDto> response) {
                 if (response.isSuccessful()) {
-                    _category.setValue(mRevisionCategoryMapper.mapToRevisionCategory(response.body()));
+                    _card.setValue(cardMapper.mapToCard(response.body()));
                     _error.setValue(null);
                 } else {
                     _error.setValue(NetworkError.REQUEST_ERROR);
@@ -83,7 +75,7 @@ public class CardViewModel extends AndroidViewModel {
             }
 
             @Override
-            public void onFailure(@NotNull Call<RevisionCategoryDto> call, @NotNull Throwable t) {
+            public void onFailure(@NotNull Call<CardDto> call, @NotNull Throwable t) {
                 if (t instanceof NoConnectivityException) {
                     _error.setValue(NetworkError.NO_CONNECTION);
                 } else {
@@ -115,10 +107,6 @@ public class CardViewModel extends AndroidViewModel {
                 }
             }
         });
-    }
-
-    public LiveData<RevisionCategory> getCategory() {
-        return category;
     }
 
     public LiveData<Card> getCard() {

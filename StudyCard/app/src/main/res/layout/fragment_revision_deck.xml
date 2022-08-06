@@ -39,16 +39,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="start"
-                    android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
                     android:enabled="true"
-                    android:text="@string/to_study"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
+                    android:text="@string/to_study"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toLeftOf="@id/nb_cards_to_study"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/nb_cards_to_study"
@@ -126,15 +125,29 @@
 
     </LinearLayout>
 
-    <!--  <include
-          android:id="@+id/error_layout"
-          layout="@layout/network_error_layout"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:visibility="gone"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent" />-->
+
+    <LinearLayout
+        android:id="@+id/error_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent">
+
+        <ImageView
+            android:id="@+id/error_image"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:contentDescription="@string/http_no_connection"
+            tools:srcCompat="@drawable/ic_no_wifi" />
+
+        <TextView
+            android:id="@+id/error_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:text="@string/http_no_connection" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

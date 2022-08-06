@@ -46,6 +46,9 @@
         <action
             android:id="@+id/action_CardsDeckFragment_to_StudyCardFragment"
             app:destination="@id/StudyCardFragment" />
+        <action
+            android:id="@+id/action_CardsDeckFragment_to_CardFragment"
+            app:destination="@id/CardFragment" />
     </fragment>
 
     <fragment
@@ -80,4 +83,10 @@
         android:name="be.henallux.studycard.ui.personnalInformations.PersonnalInformationsFragment"
         android:label="personnal_informations_fragment"
         tools:layout="@layout/fragment_personnal_informations" />
+
+    <fragment
+        android:id="@+id/CardFragment"
+        android:name="be.henallux.studycard.ui.card.CardFragment"
+        android:label="card_fragment"
+        tools:layout="@layout/fragment_card" />
 </navigation>

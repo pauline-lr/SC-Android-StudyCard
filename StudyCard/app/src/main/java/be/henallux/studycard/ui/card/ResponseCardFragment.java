@@ -1,11 +1,8 @@
 package be.henallux.studycard.ui.card;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import androidx.lifecycle.ViewModelProvider;
@@ -16,21 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.material.navigation.NavigationView;
-
-import java.util.List;
 
 import be.henallux.studycard.R;
 import be.henallux.studycard.databinding.FragmentResponseCardBinding;
-import be.henallux.studycard.databinding.FragmentResponseCardBinding;
 import be.henallux.studycard.models.Card;
 import be.henallux.studycard.models.NetworkError;
-import be.henallux.studycard.models.RevisionCategory;
-import be.henallux.studycard.repositories.web.dto.RevisionCategoryDto;
 import be.henallux.studycard.ui.MainActivity;
 import be.henallux.studycard.ui.deck.DeckViewModel;
 import be.henallux.studycard.ui.deck.RevisionDeckFragment;
@@ -74,7 +62,7 @@ public class ResponseCardFragment extends Fragment {
 
         mDeckViewModel.getAllCardsFromDeck(id);
 
-        mCardViewModel.getCardFromWeb(id, position);
+        mCardViewModel.getCardByPositionFromWeb(id, position);
 
         mCardViewModel.getError().observe(getViewLifecycleOwner(), this::displayErrorScreen);
 
@@ -127,7 +115,6 @@ public class ResponseCardFragment extends Fragment {
     @Override
     public void onResume() {
         ((MainActivity) requireActivity()).setToolBarTitle(deckName);
-
         super.onResume();
     }
 

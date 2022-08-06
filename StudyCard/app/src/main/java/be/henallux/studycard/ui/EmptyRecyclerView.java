@@ -1,4 +1,4 @@
-package be.henallux.studycard.ui.home;
+package be.henallux.studycard.ui;
 
 import android.content.Context;
 import android.util.AttributeSet;

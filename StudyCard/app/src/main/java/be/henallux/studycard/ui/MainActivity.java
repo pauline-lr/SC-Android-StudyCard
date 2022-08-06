@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
+
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.homeFragment, R.id.personnalInformationsFragment)
                 .setDrawerLayout(drawer)
@@ -41,8 +42,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         Objects.requireNonNull(getSupportActionBar()).setDisplayUseLogoEnabled(false);
     }
 

@@ -20,6 +20,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import be.henallux.studycard.R;
 import be.henallux.studycard.databinding.FragmentRevisionDeckBinding;
 import be.henallux.studycard.models.Card;
+import be.henallux.studycard.models.NetworkError;
 import be.henallux.studycard.ui.MainActivity;
 import be.henallux.studycard.ui.card.StudyCardFragment;
 
@@ -56,8 +57,7 @@ public class RevisionDeckFragment extends Fragment {
         id = getArguments().getInt(ARG_DECK_ID);
         deckName = getArguments().getString(ARG_DECK_NAME);
 
-        // mRevisionDeckViewModel.getError().observe(getViewLifecycleOwner(), this::displayErrorScreen);
-        // mFragmentRevisionDeckBinding.revisionDeckButton.setOnClickListener(view -> sendRequestStudyRevisionDeck());
+        mRevisionDeckViewModel.getError().observe(getViewLifecycleOwner(), this::displayError);
         mFragmentRevisionDeckBinding.revisedDeckText.setVisibility(View.GONE);
         mFragmentRevisionDeckBinding.startButton.setVisibility(View.VISIBLE);
 
@@ -102,13 +102,28 @@ public class RevisionDeckFragment extends Fragment {
         mFragmentRevisionDeckBinding.startButton.setOnClickListener(view -> Navigation.findNavController(view)
                 .navigate(R.id.action_RevisionDeckFragment_to_StudyCardFragment, cardsArgs));
 
+
         return mFragmentRevisionDeckBinding.getRoot();
+    }
+
+    private void displayError(NetworkError error) {
+        if (error == null) {
+            mFragmentRevisionDeckBinding.errorLayout.setVisibility(View.GONE);
+            return;
+        }
+        mFragmentRevisionDeckBinding.startButton.setVisibility(error == NetworkError.NOT_FOUND ? View.VISIBLE : View.GONE);
+        mFragmentRevisionDeckBinding.acquiredButton.setVisibility(error == NetworkError.NOT_FOUND ? View.VISIBLE : View.GONE);
+        mFragmentRevisionDeckBinding.nbCardsAcquired.setVisibility(error == NetworkError.NOT_FOUND ? View.VISIBLE : View.GONE);
+        mFragmentRevisionDeckBinding.nbCardsToStudy.setVisibility(error == NetworkError.NOT_FOUND ? View.VISIBLE : View.GONE);
+        mFragmentRevisionDeckBinding.errorLayout.setVisibility(View.VISIBLE);
+        mFragmentRevisionDeckBinding.errorImage.setImageDrawable(getResources().getDrawable(error.getErrorDrawable(), getActivity().getTheme()));
+        mFragmentRevisionDeckBinding.errorText.setText(error.getErrorMessage());
     }
 
     @Override
     public void onResume() {
         ((MainActivity) requireActivity()).setToolBarTitle(deckName);
-        
+        ((MainActivity) requireActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         super.onResume();
     }
 
@@ -135,8 +150,6 @@ public class RevisionDeckFragment extends Fragment {
         @Override
         public RevisionDeckViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_layout, parent, false);
-
-
             return new RevisionDeckViewHolder(itemView);
         }
 
@@ -149,20 +162,11 @@ public class RevisionDeckFragment extends Fragment {
         public int getItemCount() {
             return mCards == null ? 0 : mCards.size();
         }
-
-
     }
 
     private static class RevisionDeckViewHolder extends RecyclerView.ViewHolder {
-        protected TextView nbCardsToStudy;
-        protected TextView nbCardsAcquired;
-        protected TextView revisedDeckText;
-
         RevisionDeckViewHolder(View itemView) {
             super(itemView);
-            nbCardsToStudy = itemView.findViewById(R.id.nb_cards_to_study);
-            nbCardsAcquired = itemView.findViewById(R.id.nb_cards_acquired);
-            revisedDeckText = itemView.findViewById(R.id.revised_deck_text);
         }
     }
 }
