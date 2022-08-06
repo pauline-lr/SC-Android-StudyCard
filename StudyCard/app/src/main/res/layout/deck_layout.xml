@@ -19,6 +19,7 @@
             android:enabled="true"
             android:text="@string/deck_name"
             android:width="300dp"
+            android:backgroundTint="@color/deep_blue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

@@ -18,7 +18,7 @@
             android:layout_gravity="start"
             android:enabled="true"
             android:text="@string/card_text"
-            android:textColor="@color/grey_dark"
+            android:textColor="@color/deep_blue"
             android:backgroundTint="@color/white"
             android:width="300dp"
             android:textSize="10sp"

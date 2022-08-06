@@ -73,6 +73,7 @@
                 android:gravity="center"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
+                android:backgroundTint="@color/red"
                 android:text="@string/start_revison"
                 app:layout_constraintBottom_toBottomOf="@id/recycler_view"
                 app:layout_constraintLeft_toLeftOf="parent"

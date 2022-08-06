@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="red">#F44336</color>
-    <color name="deep_red">#D32F2F</color>
-    <color name="pink">#FFCDD2</color>
-    <color name="green">#4CAF50</color>
+    <color name="red">#e76f51</color>
+    <color name="deep_blue">#457b9d</color>
+    <color name="pink">#f1faee</color>
+    <color name="green">#2a9d8f</color>
     <color name="grey_dark">#212121</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="purple">#9370db</color>
+    <color name="purple">#005f73</color>
     <color name="light_grey">#adadad</color>
-    <color name="light_blue">#87CEFA</color>
+    <color name="light_blue">#0a9396</color>
 
 </resources>
