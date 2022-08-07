@@ -12,6 +12,10 @@
             android:id="@id/personnalInformationsFragment"
             android:icon="@drawable/account"
             android:title="@string/personnal_informations" />
+        <item
+            android:id="@id/loginFragment"
+            android:icon="@drawable/logout"
+            android:title="@string/logout" />
     </group>
 </menu>
 

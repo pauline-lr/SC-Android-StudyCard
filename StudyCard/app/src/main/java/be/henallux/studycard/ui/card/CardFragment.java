@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import be.henallux.studycard.R;
 import be.henallux.studycard.databinding.FragmentCardBinding;
 import be.henallux.studycard.models.Card;
 import be.henallux.studycard.models.NetworkError;

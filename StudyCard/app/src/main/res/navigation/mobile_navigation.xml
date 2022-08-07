@@ -36,6 +36,9 @@
         <action
             android:id="@+id/action_RevisionDeckFragment_to_StudyCardFragment"
             app:destination="@id/StudyCardFragment" />
+        <action
+            android:id="@+id/action_RevisionDeckFragmentFragment_to_HomeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 
     <fragment

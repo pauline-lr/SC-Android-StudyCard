@@ -102,6 +102,9 @@ public class RevisionDeckFragment extends Fragment {
         mFragmentRevisionDeckBinding.startButton.setOnClickListener(view -> Navigation.findNavController(view)
                 .navigate(R.id.action_RevisionDeckFragment_to_StudyCardFragment, cardsArgs));
 
+        mFragmentRevisionDeckBinding.leaveButton.setOnClickListener(view -> Navigation.findNavController(view)
+                .navigate(R.id.action_RevisionDeckFragmentFragment_to_HomeFragment));
+
 
         return mFragmentRevisionDeckBinding.getRoot();
     }

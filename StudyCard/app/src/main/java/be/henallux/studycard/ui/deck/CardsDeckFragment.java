@@ -66,6 +66,7 @@ public class CardsDeckFragment extends Fragment {
                     mCardsDeckAdapter.setCardAcquired(cardsList);
                     mFragmentCardsDeckBinding.toStudyText.setText(R.string.cards_acquired);
                 }
+                mCardsDeckAdapter.setDeckName(deckName);
                 mFragmentCardsDeckBinding.progressBar.setVisibility(View.GONE);
                 mFragmentCardsDeckBinding.recyclerView.setVisibility(View.VISIBLE);
             });
@@ -134,6 +135,7 @@ public class CardsDeckFragment extends Fragment {
     private static class CardsDeckAdapter extends RecyclerView.Adapter<CardDeckViewHolder> {
         private List<Card> mCards;
         private static ClickListener clickListener;
+        private String deckName;
 
         public void setCardToStudy(List<Card> cards) {
             this.mCards = cards;
@@ -145,6 +147,10 @@ public class CardsDeckFragment extends Fragment {
             notifyDataSetChanged();
         }
 
+        public void setDeckName(String deckName){
+            this.deckName = deckName;
+            notifyDataSetChanged();
+        }
         @NonNull
         @Override
         public CardDeckViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -158,7 +164,7 @@ public class CardsDeckFragment extends Fragment {
             String textFrontCard = Utils.getFrontCardTextToList(textInitFrontCard, position);
             holder.cardButton.setText(textFrontCard);
 
-            Bundle cardArgs = CardFragment.newArguments(mCards.get(position).id, "Nom du deck");
+            Bundle cardArgs = CardFragment.newArguments(mCards.get(position).id, deckName);
             holder.cardButton.setOnClickListener(view -> {
                 Navigation.findNavController(view).navigate(R.id.action_CardsDeckFragment_to_CardFragment, cardArgs);
             });

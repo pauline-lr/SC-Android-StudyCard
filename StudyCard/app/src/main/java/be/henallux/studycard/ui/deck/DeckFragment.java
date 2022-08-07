@@ -101,7 +101,6 @@ public class DeckFragment extends Fragment {
     @Override
     public void onResume() {
         ((MainActivity) requireActivity()).setToolBarTitle(deckName);
-        Objects.requireNonNull(((MainActivity) requireActivity()).getSupportActionBar()).setDisplayHomeAsUpEnabled(false);
         super.onResume();
         updateAdapterRunnable.run();
     }

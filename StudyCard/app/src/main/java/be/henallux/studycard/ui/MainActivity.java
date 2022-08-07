@@ -1,10 +1,14 @@
 package be.henallux.studycard.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -16,6 +20,7 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.Objects;
 
 import be.henallux.studycard.R;
+import be.henallux.studycard.ui.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
@@ -34,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.homeFragment, R.id.personnalInformationsFragment)
+                R.id.homeFragment, R.id.personnalInformationsFragment, R.id.loginFragment)
                 .setDrawerLayout(drawer)
                 .build();
 
@@ -42,9 +47,24 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        navigationView.setNavigationItemSelectedListener(menuItem -> {
+            int id=menuItem.getItemId();
+            //it's possible to do more actions on several items, if there is a large amount of items I prefer switch(){case} instead of if()
+            if (id==R.id.loginFragment){
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+            }
+            //This is for maintaining the behavior of the Navigation view
+            NavigationUI.onNavDestinationSelected(menuItem,navController);
+            //This is for closing the drawer after acting on it
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+        });
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayUseLogoEnabled(false);
     }
+
+
 
     @Override
     public boolean onSupportNavigateUp() {
